@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Inter:400,500,700|Roboto+Slab:800&display=swap');
+
+html {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-family);
+  font-size: var(--font-size-root);
+  line-height: var(--font-line-height); // calc(0.2em + 2ex + 0.2em);
+  ::selection {
+    background-color: rgba(var(--color-accent-rgb), 0.7);
+    color: var(--color-background);
+  }
+}
+
+a {
+  color: var(--color-text)
+}
+
+p {
+  font-weight: var(--font-weight-p);
+  line-height: var(--font-line-height);
+}
+
+ul, ol {
+  margin-bottom: var(--font-size-p);
+}
+
+h1, h2, h3, h4, h5, h6, p, small {
+  margin-top: calc(var(--gap) * var(--gap-ratio));
+  margin-bottom: calc(var(--gap) * var(--gap-ratio));
+  color: var(--color-text);
+  font-size: var(--size);
+  line-height: calc(0.2rem + 2ex + 0.2rem);
+  @include responsive('tablet') {
+    font-size: var(--size-t)
+  }
+  @include responsive('mobile') {
+    font-size: var(--size-m)
+  }
+
+  &.highlight {
+    font-size: var(--size-highlight);
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight-headings);
+}

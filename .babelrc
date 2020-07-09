@@ -1,0 +1,26 @@
+{
+    "presets": [
+        [
+            "next/babel",
+            {
+                "preset-env": { },
+                "styled-jsx": {
+                    "plugins": [
+                        "styled-jsx-plugin-sass"
+                    ]
+                }
+            }
+        ]
+    ],
+    "plugins": [
+        "inline-react-svg",
+        [
+            "babel-plugin-module-resolver",
+            {
+                "alias": {
+                    "public": "./public"
+                }
+            }
+        ]
+    ]
+}
