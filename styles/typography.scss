@@ -31,15 +31,13 @@ h1, h2, h3, h4, h5, h6, p, small {
   color: var(--color-text);
   font-size: var(--size);
   line-height: calc(0.2rem + 2ex + 0.2rem);
-  
   @include responsive('tablet') {
     font-size: var(--size-t)
   }
-  
   @include responsive('mobile') {
     font-size: var(--size-m)
   }
-  
+
   &.highlight {
     font-size: var(--size-highlight);
   }

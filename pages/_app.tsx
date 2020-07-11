@@ -23,15 +23,6 @@ export const Root: FC<Props> = ({ pageProps, Component }) => {
   
   return (
     <>
-      <style jsx>{`
-        .header {
-          height: 100px;
-          max-width: 1200px;
-          margin: 0 auto;
-          display: flex;
-          align-content: space-between;
-        }
-      `}</style>
       <header className="header">
         <Logo href="#home" src=""><LogoSvg /></Logo>
         <Nav>
@@ -42,6 +33,14 @@ export const Root: FC<Props> = ({ pageProps, Component }) => {
         </Nav>
       </header>
       <style jsx>{`
+        .header {
+          height: 100px;
+          max-width: 1200px;
+          margin: 0 auto;
+          display: flex;
+          align-content: space-between;
+        }
+        
         .contact-info, .tag-line {
           position: fixed;
           top: 50vh;
@@ -55,27 +54,49 @@ export const Root: FC<Props> = ({ pageProps, Component }) => {
           align-items: center;
           justify-content: center;
           -webkit-font-smoothing: antialiased;
-
+          
           a {
             text-decoration: none;
             margin: var(--space-2x);
             color: rgba(var(--color-text-rgb), 0.85);
-
+            
             &:hover, &:focus, &:active {
               color: var(--color-accent);
             }
           }
-
+          
           .contact-info__icon {
             font-size: 2.8rem;
             transform: rotate(90deg);
           }
         }
-
+        
         .tag-line {
           left: unset;
           right: calc(var(--frame-border) / 2);
           transform: perspective(1px) translate(50%) rotate(90deg) translate3d(0, 0, 0) scale(0.99);
+        }
+        
+        .main {
+          min-height: calc(100vh - var(--header-height));
+          background-color: red;
+          margin: 0 60px;
+        }
+        
+        .footer {
+          height: var(--frame-border);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 17px;
+          font-weight: 500;
+          text-transform: uppercase;
+          letter-spacing: 0.075rem;
+          
+          .footer-heart {
+            color: red;
+            font-size: 24px
+          }
         }
       `}</style>
       <span className="contact-info">
@@ -116,33 +137,9 @@ export const Root: FC<Props> = ({ pageProps, Component }) => {
           
         </div>
       </header>*/}
-      <style jsx>{`
-        .main {
-          min-height: calc(100vh - var(--header-height));
-          background-color: red;
-          margin: 0 60px;
-        }
-      `}</style>
       <main className="main">
         <Component {...pageProps} />
       </main>
-      <style jsx>{`
-        .footer {
-          height: var(--frame-border);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 17px;
-          font-weight: 500;
-          text-transform: uppercase;
-          letter-spacing: 0.075rem;
-
-          .footer-heart {
-            color: red;
-            font-size: 24px
-          }
-        }
-      `}</style>
       <footer className="footer">Made with <span className="footer-heart">&nbsp;❤&nbsp;</span> by Tellmann</footer>
       {/*<Frame>
         <Header showHeader={showHeader}>

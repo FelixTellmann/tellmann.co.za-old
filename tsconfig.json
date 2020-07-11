@@ -17,27 +17,7 @@
         "resolveJsonModule": true,
         "isolatedModules": true,
         "jsx": "preserve",
-        "baseUrl": ".",
-        "paths": {
-            "components/*": [
-                "components/*"
-            ],
-            "pages/*": [
-                "pages/*"
-            ],
-            "library/*": [
-                "library/*"
-            ],
-            "public/*": [
-                "public/*"
-            ],
-            "styles/*": [
-                "styles/*"
-            ],
-            "layouts/*": [
-                "layouts/*"
-            ]
-        }
+        "baseUrl": "."
     },
     "exclude": [
         "node_modules"

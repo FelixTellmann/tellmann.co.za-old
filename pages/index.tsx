@@ -6,8 +6,11 @@ import { Container } from "layouts/Container";
 const Index: FC = (props) => {
   return (
     <>
-      <div>home page</div>
-      <div>home page</div>
+      <Container align="center">
+  
+        <div>home page</div>
+        <div>home page</div>
+      </Container>
     </>
   );
 };

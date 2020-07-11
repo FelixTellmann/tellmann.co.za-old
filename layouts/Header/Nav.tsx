@@ -27,11 +27,11 @@ type NavItemProps = {
   style?: "button"
 }
 
-Nav.Item = ({ title, href, onClick, target, style }) => {
+const NavItem: FC<NavItemProps> = ({ title, href, onClick, target, style }) => {
   return (
     <>
       <style jsx>{`
-        /*@import 'styles/mixins';*/
+        @import 'styles/mixins';
 
         .nav__item {
           position: relative;
@@ -43,14 +43,13 @@ Nav.Item = ({ title, href, onClick, target, style }) => {
           font-weight: var(--font-weight-nav);
           text-decoration: none;
           transition: var(--transition-2);
-
           &:last-of-type {
             margin: 0 0 0 var(--gap);
           }
 
-         /* @include responsive('mobile') {
+          @include responsive('mobile') {
             margin: 0 var(--spacing-2)
-          }*/
+          }
 
           &:before {
             position: absolute;
@@ -146,3 +145,4 @@ Nav.Item = ({ title, href, onClick, target, style }) => {
   );
 };
 
+Nav.Item = NavItem;
