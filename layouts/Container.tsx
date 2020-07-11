@@ -73,7 +73,7 @@ export const Container: FC<ContainerProps> = (
     `}</style>
       <style jsx>{`
         @import 'styles/mixins';
-
+        
         .container {
           position: relative;
           min-width: 1px;

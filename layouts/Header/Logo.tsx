@@ -14,7 +14,8 @@ export const Logo: FC<LogoProps> = ({ children, href, src, headerActive = true }
       <style jsx global>{`
         .logo {
           display: block;
-          flex: 0.5;
+          min-width: 1px;
+          height: 100%;
           padding: var(--space-2x) 0;
 
           img, svg {

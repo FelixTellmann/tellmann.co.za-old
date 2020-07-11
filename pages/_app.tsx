@@ -2,6 +2,7 @@ import App, { AppProps } from "next/app";
 import React, { FC, Fragment, CSSProperties } from "react";
 import LogoSvg from "public/logo3-28.svg";
 import { useGlobalEvent } from "beautiful-react-hooks";
+import { IoLogoWhatsapp, IoLogoFacebook } from "react-icons/io";
 
 import "styles/reset.css";
 import "styles/typography.scss";
@@ -22,6 +23,127 @@ export const Root: FC<Props> = ({ pageProps, Component }) => {
   
   return (
     <>
+      <style jsx>{`
+        .header {
+          height: 100px;
+          max-width: 1200px;
+          margin: 0 auto;
+          display: flex;
+          align-content: space-between;
+        }
+      `}</style>
+      <header className="header">
+        <Logo href="#home" src=""><LogoSvg /></Logo>
+        <Nav>
+          <Nav.Item href="#about" title="About" onClick={(e) => console.log("asd")} />
+          <Nav.Item href="#work" title="Work" />
+          <Nav.Item href="#services" title="Services" />
+          <Nav.Item href="#contact" title="Contact" style={"button"} />
+        </Nav>
+      </header>
+      <style jsx>{`
+        .contact-info, .tag-line {
+          position: fixed;
+          top: 50vh;
+          text-transform: uppercase;
+          font-size: 1.7rem;
+          transform: perspective(1px) translate(-50%) rotate(-90deg) translate3d(0, 0, 0) scale(0.99);
+          backface-visibility: hidden;
+          left: calc(var(--frame-border) / 2);
+          letter-spacing: 0.075rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          -webkit-font-smoothing: antialiased;
+
+          a {
+            text-decoration: none;
+            margin: var(--space-2x);
+            color: rgba(var(--color-text-rgb), 0.85);
+
+            &:hover, &:focus, &:active {
+              color: var(--color-accent);
+            }
+          }
+
+          .contact-info__icon {
+            font-size: 2.8rem;
+            transform: rotate(90deg);
+          }
+        }
+
+        .tag-line {
+          left: unset;
+          right: calc(var(--frame-border) / 2);
+          transform: perspective(1px) translate(50%) rotate(90deg) translate3d(0, 0, 0) scale(0.99);
+        }
+      `}</style>
+      <span className="contact-info">
+        <a className="contact-info__icon" href="#facebook"><IoLogoFacebook /></a>
+        <a className="contact-info__icon" href="#whatsapp"><IoLogoWhatsapp /></a>
+        
+        <a href="mailto:info@tellmann.co.za">info@tellmann.co.za</a>
+        
+        <a href="tel:+27760313590">076 031 3590</a>
+      </span>
+      <div className="tag-line"><a href="#about">Your Partners in Success</a></div>
+      {/*<header>
+        <div className="desktop">
+          logo
+          nav
+            home
+            About
+            Work
+            Services
+            Contact - as button
+        </div>
+        <div className="mobile">
+          logo
+          icon
+          nav
+            home - hi.
+            About - who we are
+            Work - what we've done
+            Services - what we can do
+            Contact - get in touch
+          line
+          address
+          line
+          social icons
+          email
+          
+          background graphics
+          
+        </div>
+      </header>*/}
+      <style jsx>{`
+        .main {
+          min-height: calc(100vh - var(--header-height));
+          background-color: red;
+          margin: 0 60px;
+        }
+      `}</style>
+      <main className="main">
+        <Component {...pageProps} />
+      </main>
+      <style jsx>{`
+        .footer {
+          height: var(--frame-border);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 17px;
+          font-weight: 500;
+          text-transform: uppercase;
+          letter-spacing: 0.075rem;
+
+          .footer-heart {
+            color: red;
+            font-size: 24px
+          }
+        }
+      `}</style>
+      <footer className="footer">Made with <span className="footer-heart">&nbsp;❤&nbsp;</span> by Tellmann</footer>
       {/*<Frame>
         <Header showHeader={showHeader}>
           <Logo href="#home" src=""><LogoSvg /></Logo>
@@ -39,7 +161,6 @@ export const Root: FC<Props> = ({ pageProps, Component }) => {
         </Header>
         
       </Frame>*/}
-      <Component {...pageProps} />
       {/*<Footer>
         <FooterNav>
           <FooterNavGroup title={`Selling Online made Easy`} responsive={["col", "col", "hidden"]}>
