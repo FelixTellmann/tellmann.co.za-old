@@ -10,74 +10,73 @@ type ButtonProps = {
   
 }
 
-export const Button: FC<ButtonProps> = ({ children, href = "", title, style = {}, onClick, size }) => {
+export const Button: FC<ButtonProps> = ({ href = "", title, style = {}, onClick, size }) => {
   
   size && (style["--font-size-button"] = size);
   
   return (
     <>
       <style jsx>{`
-
         .button {
           position: relative;
           content: '';
           min-width: 130px;
           max-height: calc(var(--font-line-height) + var(--space-4x) + 0.4rem);
+          display: flex;
           align-self: center;
-          margin-left: var(--gap);
+          justify-content: center;
           padding: calc(var(--font-size-button) / 1.75) calc(var(--font-size-button) * 1.75);
+          border: 2px solid var(--color-text);
+          border-radius: 4px;
           cursor: pointer;
           user-select: none;
-          color: var(--color-background);
+          color: var(--color-text);
           font-size: var(--font-size-button);
-          font-weight: var(--font-weight-button); line-height: var(--font-line-height);
+          font-weight: var(--font-weight-button);
+          line-height: var(--font-line-height);
           text-align: center;
           text-decoration: none;
           text-transform: uppercase;
           transition: ease-in-out 0.2s;
-          /*================ Border ================*/
-          &:before {
+          
+          &:before, &:after {
             position: absolute;
             content: '';
             z-index: -1;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--color-text);
+            width: 0.5rem;
+            height: 6rem;
+            opacity: 0;
+            display: block;
+            background: var(--color-text);
+            transition: ease-in-out 0.2s;
           }
-
-          /*================ Box background ================*/
+          
+          &:before {
+            top: -80px;
+            left: calc(50% + 4.5px);
+          }
+          
           &:after {
-            position: absolute;
-            content: '';
-            z-index: -2;
-            top: 2px;
-            left: 2px;
-            width: calc(100% + 2px);
-            height: calc(100% + 2px);
-            border: 2px solid var(--color-accent);
+            background: var(--color-accent);
+            bottom: -80px;
+            left: calc(50% - 4.5px);
           }
-
-          /*================  Hover/Focus/Active ================*/
+          
           &:hover, &:focus, &:active {
-            box-shadow: 2px 3px 9px 2px rgba(0, 0, 0, 0.2);
-
-            span {
-              position: relative;
-              top: 3px;
-              left: 3px;
-            }
-
+            background-color: var(--color-text);
+            color: var(--color-background);
+            
             &:before {
-              top: 4px;
-              left: 4px;
-              width: calc(100% - 2px);
-              height: calc(100% - 2px);
+              top: -7px;
+              opacity: 1;
+            }
+            
+            &:after {
+              bottom: -7px;
+              opacity: 1;
             }
           }
         }
-      
       `}</style>
       {
         href

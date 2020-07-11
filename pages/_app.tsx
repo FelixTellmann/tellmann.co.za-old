@@ -8,10 +8,11 @@ import "styles/reset.scss";
 import "styles/typography.scss";
 import "styles/theme.scss";
 import "styles/animations.scss";
+import "styles/button.scss";
 
 import { useState, useEffect } from "react";
 import { Button, Loading } from "components";
-import { Frame, Container, Spacer, Section } from "layouts";
+import { Frame, Container, Spacer, Section, Footer } from "layouts";
 import { Header, Logo, Nav, SocialNav } from "layouts/Header";
 
 export type Props = AppProps
@@ -23,6 +24,19 @@ export const Root: FC<Props> = ({ pageProps, Component }) => {
   
   return (
     <>
+      <style jsx>{`
+        @import 'styles/mixins';
+        
+        .main {
+          min-height: calc(100vh - var(--header-height));
+          background-color: red;
+          margin: var(--header-height) 0 0;
+          @include responsive('desktop') {
+            margin: var(--header-height) 60px 0;
+          }
+        }
+      
+      `}</style>
       <Header
         logo={{ href: "#home", src: "", alt: "Tellmann Logo" }}
         nav={[
@@ -40,9 +54,11 @@ export const Root: FC<Props> = ({ pageProps, Component }) => {
           { href: "#whatsapp", icon: "IoLogoWhatsapp", alt: "Whatsapp" }
         ]}
       >
-      
-      
       </Header>
+      <main className="main">
+        <Component {...pageProps} />
+      </main>
+      <Footer />
       {/*  <header className="header">
         <Logo href="#home" src=""><LogoSvg /></Logo>
         <Nav>
@@ -100,7 +116,7 @@ export const Root: FC<Props> = ({ pageProps, Component }) => {
         .main {
           min-height: calc(100vh - var(--header-height));
           background-color: red;
-          margin: 0 60px;
+          margin: var(--header-height) 60px 0;
         }
         
         .footer {
@@ -160,7 +176,7 @@ export const Root: FC<Props> = ({ pageProps, Component }) => {
       {/*<main className="main">
         <Component {...pageProps} />
       </main>
-      <footer className="footer">Made with <span className="footer-heart">&nbsp;❤&nbsp;</span> by Tellmann</footer>*/}
+      */}
       {/*<Frame>
         <Header showHeader={showHeader}>
           <Logo href="#home" src=""><LogoSvg /></Logo>

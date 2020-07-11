@@ -4,3 +4,4 @@ export * from "./Wrapper";
 export * from "./Spacer";
 export * from "./Frame";
 export * from "./Header";
+export * from "./Footer";

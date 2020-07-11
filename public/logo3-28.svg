@@ -10,6 +10,7 @@
 	.st4{fill:#E8472B;}
 	.st5{fill:none;stroke:#000000;stroke-width:8;stroke-miterlimit:10;}
 	.st6{fill:currentColor;}
+	path { mix-blend-mode: multiply; }
 </style>
 <g id="Layer_2" class="st0">
 </g>
