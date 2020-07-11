@@ -4,9 +4,10 @@ import LogoSvg from "public/logo3-28.svg";
 import { useGlobalEvent } from "beautiful-react-hooks";
 import { IoLogoWhatsapp, IoLogoFacebook } from "react-icons/io";
 
-import "styles/reset.css";
+import "styles/reset.scss";
 import "styles/typography.scss";
 import "styles/theme.scss";
+import "styles/animations.scss";
 
 import { useState, useEffect } from "react";
 import { Button, Loading } from "components";
@@ -16,14 +17,33 @@ import { Header, Logo, Nav, SocialNav } from "layouts/Header";
 export type Props = AppProps
 
 export const Root: FC<Props> = ({ pageProps, Component }) => {
-  const [loading, setLoading] = useState(false);
   const [showHeader, setShowHeader] = useState(false);
   
   useGlobalEvent("scroll")((e) => setShowHeader(window.scrollY > 400));
   
   return (
     <>
-      <header className="header">
+      <Header
+        logo={{ href: "#home", src: "", alt: "Tellmann Logo" }}
+        nav={[
+          { href: "#home", title: "Home", alt: "Hi.", style: "hideOnDesktop" },
+          { href: "#about", title: "About", alt: "Who we are" },
+          { href: "#work", title: "Work", alt: `What we've done` },
+          { href: "#services", title: "Services", alt: `What we can do` },
+          { href: "#contact", title: "Contact", alt: `Get in touch`, style: "button" }
+        ]}
+        address={{ city: "Cape Town", street: "Woodstock Exchange", location: "Office 12", tel: "+27760313590" }}
+        contactNav={[
+          { href: "mailto:info@tellmann.co.za", title: "info@tellmann.co.za", icon: "IoIosMail", nav: true, alt: "Email Us" },
+          { href: "tel: +27760313590", title: "076 031 3590", icon: "IoIosCall", alt: "Call Us", nav: true, style: "iconOnMobile" },
+          { href: "#facebook", icon: "IoLogoFacebook", alt: "Facebook" },
+          { href: "#whatsapp", icon: "IoLogoWhatsapp", alt: "Whatsapp" }
+        ]}
+      >
+      
+      
+      </Header>
+      {/*  <header className="header">
         <Logo href="#home" src=""><LogoSvg /></Logo>
         <Nav>
           <Nav.Item href="#about" title="About" onClick={(e) => console.log("asd")} />
@@ -107,7 +127,7 @@ export const Root: FC<Props> = ({ pageProps, Component }) => {
         
         <a href="tel:+27760313590">076 031 3590</a>
       </span>
-      <div className="tag-line"><a href="#about">Your Partners in Success</a></div>
+      <div className="tag-line"><a href="#about">Your Partners in Success</a></div>*/}
       {/*<header>
         <div className="desktop">
           logo
@@ -137,10 +157,10 @@ export const Root: FC<Props> = ({ pageProps, Component }) => {
           
         </div>
       </header>*/}
-      <main className="main">
+      {/*<main className="main">
         <Component {...pageProps} />
       </main>
-      <footer className="footer">Made with <span className="footer-heart">&nbsp;❤&nbsp;</span> by Tellmann</footer>
+      <footer className="footer">Made with <span className="footer-heart">&nbsp;❤&nbsp;</span> by Tellmann</footer>*/}
       {/*<Frame>
         <Header showHeader={showHeader}>
           <Logo href="#home" src=""><LogoSvg /></Logo>

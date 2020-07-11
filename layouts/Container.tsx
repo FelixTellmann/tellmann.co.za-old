@@ -97,7 +97,7 @@ export const Container: FC<ContainerProps> = (
       `}</style>
       {
         wrapper
-        ? <Wrapper width={maxWidth && maxWidth}>
+        ? <Wrapper width={maxWidth && maxWidth} height="100%">
           <div id={id} className={`container ${className}`} style={style}>{children}</div>
         </Wrapper>
         : <div id={id} className={`container ${className}`} style={style}>{children}</div>

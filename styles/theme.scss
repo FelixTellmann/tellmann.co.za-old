@@ -1,9 +1,10 @@
 
 :root {
   /*================ Colors ================*/
-  --color-text: #252627; // #252627
+  --color-text: #171717; // #252627
   --color-text-rgb: 37, 38, 39;
   --color-border: #eaeaea;
+  --color-border-rgb: 234, 234, 234;
   --color-background: #fafafa; //#fafafa
   --color-background-rgb: 250, 250, 250;
   --color-accent: #e8472b;
@@ -56,17 +57,20 @@ small { --size: 1.4rem; --size-t: 1.4rem; --size-m: 1.4rem;}
   /* Type Options
 
   /*================ Frame, Header, Footer ================*/
-  --frame-width: 120rem;
-  --frame-padding: var(--gap);
+  --wrapper-width: 120rem;
+  --wrapper-padding: var(--gap);
   --frame-border: 6rem;
   --header-height: 10rem;
+  @include responsive(small) {
+    --header-height: 8rem;
+  }
   --header-padding: 1rem;
   --header-border-bottom: rgba(0, 0, 0, 0.15) 0px -1px 0px 0px inset;
   --footer-padding: 2rem;
   /*================ Spacing ================*/
   --gap: 2.4rem;
   --grid-gap-ratio: 4;
-
+  
   * {
     --gap-ratio: 1;
     --gap-ratio-y: 1;
@@ -74,7 +78,7 @@ small { --size: 1.4rem; --size-t: 1.4rem; --size-m: 1.4rem;}
     --gap-ratio-top: 1;
     --gap-ratio-bottom: 1;
   }
-
+  
   --space-1x: 0.4rem;
   --space-2x: 0.8rem;
   --space-4x: 1.6rem;
@@ -100,6 +104,7 @@ small { --size: 1.4rem; --size-t: 1.4rem; --size-m: 1.4rem;}
   /*================ Transitions ================*/
   --transition: 0.1s ease-in-out;
   --transition-2: 0.2s ease-in-out;
+  --transition-4: 0.4s ease-in-out;
   --padding-0: 0rem;
   --padding-1: 2.4rem;
   --padding-2: 4.8rem;
@@ -110,12 +115,12 @@ small { --size: 1.4rem; --size-t: 1.4rem; --size-m: 1.4rem;}
     --padding-3: 4.8rem; // 4.8rem on mobile 8.4rem
     --padding-4: 8.4rem; // 8.4
   }
-/*  --spacing-1: 0.4rem;
-  --spacing-2: calc(var(--spacing-1) * 2); // 8px
-  --spacing-3: calc(var(--spacing-1) * 3); // 12px
-  --spacing-4: calc(var(--spacing-1) * 4); // 16px
-  --spacing-5: calc(var(--spacing-1) * 5); // 20px
-  --spacing-6: calc(var(--spacing-1) * 6); // 24px
-  --spacing-7: calc(var(--spacing-1) * 7); // 28px
-  --spacing-8: calc(var(--spacing-1) * 8); // 32px*/
+  /*  --spacing-1: 0.4rem;
+    --spacing-2: calc(var(--spacing-1) * 2); // 8px
+    --spacing-3: calc(var(--spacing-1) * 3); // 12px
+    --spacing-4: calc(var(--spacing-1) * 4); // 16px
+    --spacing-5: calc(var(--spacing-1) * 5); // 20px
+    --spacing-6: calc(var(--spacing-1) * 6); // 24px
+    --spacing-7: calc(var(--spacing-1) * 7); // 28px
+    --spacing-8: calc(var(--spacing-1) * 8); // 32px*/
 }

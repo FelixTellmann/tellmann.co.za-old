@@ -1,42 +1,380 @@
-import { CSSProperties, FC } from "react";
+import React, { createElement, CSSProperties, FC, MouseEventHandler, useEffect, useState } from "react";
+import Fade from "react-reveal/Fade";
 import { Container } from "layouts/Container";
+import LogoSvg from "public/logo3-28.svg";
+import Link from "next/link";
+import { Text } from "../../components";
 
 type HeaderProps = {
-  showHeader: boolean
+  logo: { href: string, src: string, alt?: string }
+  nav: { href: string, title: string, alt?: string, style?: "button" | "hideOnDesktop" }[]
+  address: { city: string, street: string, location: string, tel: string }
+  contactNav: { href: string, title?: string, icon?: string, alt: string, style?: "iconOnMobile", nav?: boolean }[]
   style?: CSSProperties
 }
 
-export const Header: FC<HeaderProps> = ({ children, showHeader, style = {} }) => {
+export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style = {} }) => {
+  
+  const [showMobileHeader, setShowMobileHeader] = useState(false);
+  const toggleMobileNav: MouseEventHandler = () => setShowMobileHeader(!showMobileHeader);
   
   return (
     <>
       <style jsx>{`
         .header {
-          position: absolute;
+          position: fixed;
           z-index: 1000;
-          top: 90px;
+          top: 0;
+          left: 0;
           width: 100%;
           height: var(--header-height);
-          display: flex;
-          transition: background-color var(--transition);
-          --color-text: rgb(var(--color-background-rgb));
-          --color-background: rgb(var(--color-text-rgb));
-
-          &.active {
-            top: 0;
+          color: inherit;
+          transition-delay: 0.2s;
+          
+          a {
+            text-decoration: none;
+          }
+          
+          &:before {
             position: fixed;
-            background-color: rgba(var(--color-background-rgb), 0.7);
-            box-shadow: var(--shadow-header);
-            backdrop-filter: var(--blur);
-            --color-text: rgb(var(--color-text-rgb));
-            --color-background: rgb(var(--color-background-rgb));
+            content: '';
+            z-index: -1;
+            top: -100vh;
+            left: 0;
+            width: 50vw;
+            height: 0;
+            border-right: solid 1px rgba(var(--color-border-rgb), 0.1);
+            background-color: var(--color-text);
+            transition: height var(--transition-4);
+          }
+          
+          &:after {
+            position: fixed;
+            content: '';
+            z-index: -2;
+            right: 0;
+            bottom: -100vh;
+            width: 50vw;
+            height: 0;
+            background-color: var(--color-text);
+            transition: height var(--transition-4);
+          }
+        }
+        
+        .logo {
+          min-width: 1px;
+          height: 100%;
+          display: block;
+          padding: var(--space-2x) 0;
+          color: inherit;
+          
+          img, svg {
+            max-width: 100%;
+            height: 100%;
+            max-height: 100%;
+          }
+        }
+        
+        .nav {
+          position: absolute;
+          top: var(--header-height);
+          width: 100%;
+          height: 0;
+          display: flex;
+          overflow: hidden;
+          flex-direction: column;
+          justify-content: space-between;
+          padding: 0;
+          transition-delay: 0.4s;
+          
+          .nav__item {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            font-size: 1.8rem;
+            font-weight: 500;
+            
+            .nav__item__title {
+              position: relative;
+              
+              &:before {
+                position: absolute;
+                content: '';
+                z-index: -1;
+                bottom: -15%;
+                left: -5%;
+                width: 0;
+                height: 100%;
+                background-image: linear-gradient(transparent calc(100% - .55em), rgba(var(--color-accent-rgb), 1) 0), linear-gradient(transparent calc(100% - .55em), rgba(var(--color-accent-rgb), 1) 0);
+                background-repeat: no-repeat;
+                background-size: 0 100%, 100% 100%;
+                color: transparent;
+                transition: var(--transition-2);
+              }
+            }
+            
+            &:hover, &:focus, &:active, &.active {
+              outline: none;
+              
+              & .nav__item__title:before {
+                width: 110%;
+              }
+            }
+            
+            .nav__item__line {
+              height: 100%;
+              min-height: 0.2rem;
+              flex: 1;
+              margin: 0 0.8rem 0.1rem;
+              background-image: linear-gradient(to right, rgba(var(--color-border-rgb), 0.5) 33%, rgba(255, 255, 255, 0) 0%);
+              background-repeat: repeat-x;
+              background-position: bottom;
+              background-size: 1rem 0.1rem;
+            }
+            
+            .nav__item__alt {
+              font-size: 12px;
+              font-weight: 300;
+              line-height: 1;
+              letter-spacing: 0.05rem;
+            }
+          }
+          
+          .nav__address {
+            font-size: 1.2rem;
+            
+            a {
+              &:hover, &:focus, &:active {
+                color: var(--color-accent)
+              }
+            }
+          }
+          
+          .nav__contact {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            justify-content: space-between;
+            
+            a {
+              transition: var(--transition);
+              
+              &:hover, &:focus, &:active {
+                color: var(--color-accent)
+              }
+            }
+            
+            .nav__contact__item--icon {
+              padding: var(--space-2x);
+              font-size: 2.6rem;
+            }
+            
+            .nav__contact__item--text {
+              margin-left: auto;
+              font-size: 1.4rem;
+              font-weight: 300;
+              letter-spacing: 0.1rem;
+            }
+          }
+          
+          .nav__break {
+            width: 40vw;
+            height: 0.2rem;
+            margin: var(--space-2x) 0;
+            border-radius: 0.3rem;
+            background-color: var(--color-accent);
+          }
+        }
+        
+        .mobile-nav {
+          display: flex;
+          align-items: center;
+          justify-items: flex-end;
+          
+          .mobile-nav__item {
+            opacity: 1;
+            padding-right: var(--space-2x);
+            padding-left: var(--space-2x);
+            font-size: 3.0rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            
+            &:last-of-type {
+              margin-right: var(--space-4x);
+            }
+            
+            &:hover, &:focus, &:active {
+              color: var(--color-accent)
+            }
+          }
+          
+          .nav-menu {
+            position: relative;
+            width: 3rem;
+            height: 3rem;
+            display: block;
+            cursor: pointer;
+            
+            .nav-lines {
+              &, &:before, &:after {
+                position: absolute;
+                content: '';
+                width: 100%;
+                height: 0.3rem;
+                display: block;
+                border-radius: 0.3rem;
+                background-color: var(--color-text);
+                pointer-events: none;
+                transform: rotate(0);
+              }
+              
+              & {
+                top: calc(50% - 0.3rem / 2);
+                transition: background-color .2s, top .2s, left .2s, transform .2s .15s;
+              }
+              
+              &:before {
+                bottom: 1rem;
+                left: 0;
+                width: 2rem;
+                transition: bottom .2s .2s, left .1s, transform .2s, background-color .4s .2s;
+              }
+              
+              &:after {
+                top: 1rem;
+                right: 0;
+                width: 2rem;
+                transition: top .2s .2s, right .1s, transform .2s, background-color .4s .2s;
+              }
+            }
+          }
+        }
+        
+        .header.active {
+          color: var(--color-background);
+          
+          &:before, &:after {
+            height: 200vh;
+          }
+          
+          .nav {
+            height: calc(100vh - var(--header-height));
+            padding-top: var(--space-16x);
+            padding-bottom: var(--wrapper-padding);
+            transition-delay: 0s;
+          }
+          
+          .mobile-nav {
+            .mobile-nav__item {
+              opacity: 0;
+            }
+            
+            .nav-lines {
+              & {
+                background-color: transparent;
+              }
+              
+              &:before {
+                bottom: 0;
+                left: .5rem;
+                background-color: var(--color-accent);
+                transition: background-color .2s, bottom .2s, left .2s, transform .2s .15s;
+                transform: rotate(-45deg);
+              }
+              
+              &:after {
+                top: 0;
+                right: .5rem;
+                background-color: var(--color-accent);
+                transition: background-color .2s, top .2s, right .2s, transform .2s .15s;
+                transform: rotate(45deg);
+              }
+            }
           }
         }
       
       `}</style>
-      <header className={`header ${showHeader ? "active" : ""}`} style={style}>
-        <Container wrapper row justify="space-between">
-          {children}
+      <header className={`header ${showMobileHeader ? "active" : ""}`} style={style}>
+        <Container wrapper align="center" justify="space-between" row>
+          {/*================ LOGO ================*/}
+          <Link href={logo.href}>
+            <a className="logo">
+              {logo.src.length ? <img src={logo.src} alt="Logo" /> :
+               <LogoSvg style={{ maxWidth: "100%", height: `100%`, maxHeight: `100%` }} alt={logo.alt} />}</a>
+          </Link>
+          {/*================ NAV ================*/}
+          <nav className="nav">
+            {nav.map(({ href, style, title, alt }, i) =>
+              <Link key={href} href={href}>
+                <a className={`nav__item${style === "button" ? " button" : ""}`} onClick={toggleMobileNav}>
+                  <Fade top opposite when={showMobileHeader} delay={90 * (i + 1)} duration={600}>
+                    <span className="nav__item__title">{title}</span>
+                  </Fade>
+                  <Fade when={showMobileHeader} delay={90 * (i + 1) + 350} duration={280}>
+                    <span className="nav__item__line" />
+                    <span className="nav__item__alt">{alt}</span>
+                  </Fade>
+                </a>
+              </Link>
+            )}
+            {/*================ ADDRESS ================*/}
+            <Fade left when={showMobileHeader} delay={(80 * nav.length) / (showMobileHeader ? 1 : 12)} duration={400}>
+              <div className="nav__break" />
+              <div className="nav__address">
+                <Text h6 noMargin weight={"normal"}>{address.city}</Text>
+                <Text h6 noMargin weight={"normal"}>{address.street}</Text>
+                <Text h6 noMargin weight={"normal"}>{address.location}</Text>
+                <Text h6 noMargin weight={"normal"}><a href={`tel:${address.tel}`}>{address.tel.replace("+27", "0")
+                  .replace(/^(\d\d\d)(\d\d\d)(\d\d\d\d)$/, "$1 $2 $3")}</a></Text>
+              </div>
+              {/*================ CONTACT ================*/}
+              <div className="nav__break" />
+            </Fade>
+            <Fade bottom
+                  when={showMobileHeader}
+                  delay={(80 * (nav.length + 1)) / (showMobileHeader ? 1 : 12)}
+                  duration={500}>
+              <aside className="nav__contact">
+                {contactNav.map(({ href, title = "", icon, alt, style }) =>
+                  <a key={href}
+                     href={href}
+                     className={`nav__contact__item${icon && (style === "iconOnMobile" || title === "")
+                                                     ? " nav__contact__item--icon" : " nav__contact__item--text"}`}>
+                    {
+                      icon && (style === "iconOnMobile" || title === "")
+                      ? createElement(require(icon.substr(0, 2).toLowerCase() === "io"
+                                              ? "react-icons/io"
+                                              : "react-icons/fa")[icon], { alt: title || alt })
+                      : title
+                    }
+                  </a>
+                )}
+              </aside>
+            </Fade>
+            {/* <aside className="nav__tagline">
+              <a href="#about">Your Partners in Success</a>
+            </aside>
+          */}
+          </nav>
+          <div className="mobile-nav">
+            {contactNav.map(({ href, nav, title, icon, alt }) =>
+              
+              icon && nav
+              ? <a key={href} href={href} className={`mobile-nav__item`}>
+                {
+                  createElement(require(icon.substr(0, 2).toLowerCase() === "io"
+                                        ? "react-icons/io"
+                                        : "react-icons/fa")[icon], { alt: title || alt })
+                }
+              </a>
+              : title
+            )}
+            <div className="nav-menu" onClick={toggleMobileNav}>
+              <span className="nav-lines" />
+            </div>
+          </div>
+        
         </Container>
       </header>
     </>
