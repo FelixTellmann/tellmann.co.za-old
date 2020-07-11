@@ -8,8 +8,8 @@ type ContainerProps = {
   id?: string
   className?: string
   direction?: ("row" | "column" | string)[]
-  align?: "flex-start" | "flex-end" | "center" | "baseline" | "stretch" | string
-  justify?: "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | string
+  align?: "flex-start" | "flex-end" | "center" | "baseline" | "stretch" | string | ("flex-start" | "flex-end" | "center" | "baseline" | "stretch" | string)[]
+  justify?: "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | string | ("flex-start" | "flex-end" | "center" | "baseline" | "stretch" | string)[]
   flex?: number | string
   center?: boolean
   vcenter?: boolean
@@ -25,8 +25,8 @@ export const Container: FC<ContainerProps> = (
     height,
     wrapper,
     direction = ["column", "column", "column"],
-    align = "stretch",
-    justify = "flex-start",
+    align = ["stretch", "stretch", "stretch"],
+    justify = ["flex-start", "flex-start", "flex-start"],
     flex = "0 0 auto",
     center,
     vcenter,
@@ -57,41 +57,55 @@ export const Container: FC<ContainerProps> = (
     flex = 1;
   }
   
+  if (typeof align === "string") {
+    align = [align, align, align];
+  }
+  if (typeof justify === "string") {
+    justify = [justify, justify, justify];
+  }
+  
   height && (style["height"] = height);
   
   return (
     <>
       <style jsx>{`
         .container {
-          --align-items: ${align};
           --flex: ${flex};
-          --justify-content: ${justify};
           --flex-direction: ${direction[2]};
           --flex-direction-t: ${direction[1]};
           --flex-direction-m: ${direction[0]};
+          --flex-align: ${align[2]};
+          --flex-align-t: ${align[1]};
+          --flex-align-m: ${align[0]};
+          --flex-justify: ${justify[2]};
+          --flex-justify-t: ${justify[1]};
+          --flex-justify-m: ${justify[0]};
         }
     `}</style>
-      <style jsx>{`
-        @import 'styles/mixins';
-        
-        .container {
-          position: relative;
-          min-width: 1px;
-          max-width: 100%;
-          display: flex;
-          align-items: var(--align-items);
-          flex: var(--flex);
-          justify-content: var(--justify-content);
-          @include responsive('desktop') {
-            flex-direction: var(--flex-direction);
-          }
-          @include responsive('tablet') {
-            flex-direction: var(--flex-direction-t);
-          }
-          @include responsive('mobile') {
-            flex-direction: var(--flex-direction-m);
-          }
+      <style jsx>{`@import 'styles/mixins';
+      
+      .container {
+        position: relative;
+        min-width: 1px;
+        max-width: 100%;
+        display: flex;
+        flex: var(--flex);
+        @include responsive('desktop') {
+          flex-direction: var(--flex-direction);
+          align-items: var(--flex-align);
+          justify-content: var(--flex-justify);
         }
+        @include responsive('tablet') {
+          flex-direction: var(--flex-direction-t);
+          align-items: var(--flex-align-t);
+          justify-content: var(--flex-justify-t);
+        }
+        @include responsive('mobile') {
+          flex-direction: var(--flex-direction-m);
+          align-items: var(--flex-align-m);
+          justify-content: var(--flex-justify-m);
+        }
+      }
       
       
       `}</style>

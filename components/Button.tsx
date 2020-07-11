@@ -7,10 +7,11 @@ type ButtonProps = {
   onClick?: (event: React.MouseEvent) => void;
   style?: CSSProperties
   size?: string
+  secondary?: boolean
   
 }
 
-export const Button: FC<ButtonProps> = ({ href = "", title, style = {}, onClick, size }) => {
+export const Button: FC<ButtonProps> = ({ href = "", title, style = {}, onClick, size, secondary }) => {
   
   size && (style["--font-size-button"] = size);
   
@@ -22,7 +23,7 @@ export const Button: FC<ButtonProps> = ({ href = "", title, style = {}, onClick,
           content: '';
           min-width: 130px;
           max-height: calc(var(--font-line-height) + var(--space-4x) + 0.4rem);
-          display: flex;
+          display: inline-flex;
           align-self: center;
           justify-content: center;
           padding: calc(var(--font-size-button) / 1.75) calc(var(--font-size-button) * 1.75);
@@ -57,9 +58,9 @@ export const Button: FC<ButtonProps> = ({ href = "", title, style = {}, onClick,
           }
           
           &:after {
-            background: var(--color-accent);
             bottom: -80px;
             left: calc(50% - 4.5px);
+            background: var(--color-accent);
           }
           
           &:hover, &:focus, &:active {
@@ -77,11 +78,28 @@ export const Button: FC<ButtonProps> = ({ href = "", title, style = {}, onClick,
             }
           }
         }
+        
+        .button.secondary {
+          border: 2px solid var(--color-text);
+          color: var(--color-background);
+          background-color: var(--color-text);
+          
+          &:hover, &:focus, &:active {
+            background-color: var(--color-background);
+            color: var(--color-text);
+          }
+        }
       `}</style>
       {
         href
-        ? <Link href={href}><a role="button" className="button" onClick={onClick} style={style}><span>{title}</span></a></Link>
-        : <a role="button" className="button" onClick={onClick} style={style}><span>{title}</span></a>
+        ? <Link href={href}><a role="button"
+                               className={`button${secondary ? " secondary" : ""}`}
+                               onClick={onClick}
+                               style={style}><span>{title}</span></a></Link>
+        : <a role="button"
+             className={`button${secondary ? " secondary" : ""}`}
+             onClick={onClick}
+             style={style}><span>{title}</span></a>
       }
     
     </>

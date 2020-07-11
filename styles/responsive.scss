@@ -1,0 +1,17 @@
+.desktop-only {
+  @include responsive('small') {
+    display: none;
+  }
+}
+
+.tablet-and-up-only {
+  @include responsive('mobile') {
+    display: none;
+  }
+}
+
+.mobile-only {
+  @include responsive('tablet-and-up') {
+    display: none;
+  }
+}

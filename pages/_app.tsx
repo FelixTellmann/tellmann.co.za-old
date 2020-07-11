@@ -9,6 +9,7 @@ import "styles/typography.scss";
 import "styles/theme.scss";
 import "styles/animations.scss";
 import "styles/button.scss";
+import "styles/responsive.scss";
 
 import { useState, useEffect } from "react";
 import { Button, Loading } from "components";
