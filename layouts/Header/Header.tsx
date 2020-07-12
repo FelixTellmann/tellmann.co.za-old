@@ -265,7 +265,7 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
           color: var(--color-background);
           
           &:before, &:after {
-            height: 220vh;
+            height: 250vh;
             bottom: -20vh;
           }
           
