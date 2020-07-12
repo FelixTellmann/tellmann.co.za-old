@@ -263,7 +263,7 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
           color: var(--color-background);
           
           &:before, &:after {
-            height: 200vh;
+            height: 220vh;
           }
           
           .nav {
