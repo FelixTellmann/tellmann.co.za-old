@@ -195,6 +195,7 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
             background-color: var(--color-accent);
           }
         }
+        
         .mobile-nav {
           display: flex;
           align-items: center;
@@ -259,11 +260,13 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
             }
           }
         }
+        
         .header.active {
           color: var(--color-background);
           
           &:before, &:after {
             height: 220vh;
+            bottom: 0;
           }
           
           .nav {
@@ -277,8 +280,8 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
           .mobile-nav {
             .mobile-nav__item {
               opacity: 0;
-              pointer-events: none;
               visibility: hidden;
+              pointer-events: none;
             }
             
             .nav-lines {
