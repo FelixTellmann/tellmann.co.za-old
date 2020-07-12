@@ -42,6 +42,7 @@ export const Section: FC<SectionProps> = ({ children, height, zIndex, overlay, l
           margin-left: auto;
           --gap-ratio-top: var(--gap-ratio);
           --gap-ratio-bottom: var(--gap-ratio);
+          min-height: -webkit-fill-available;
         }
         
         .overlay {
