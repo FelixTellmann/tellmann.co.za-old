@@ -38,11 +38,11 @@ export const Section: FC<SectionProps> = ({ children, height, zIndex, overlay, l
         .section {
           position: relative;
           z-index: 0;
+          min-height: -webkit-fill-available;
           margin-right: auto;
           margin-left: auto;
           --gap-ratio-top: var(--gap-ratio);
           --gap-ratio-bottom: var(--gap-ratio);
-          min-height: calc(-webkit-fill-available - var(--header-height));
         }
         
         .overlay {
