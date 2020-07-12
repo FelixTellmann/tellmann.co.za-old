@@ -11,7 +11,7 @@ const Index: FC = (props) => {
                wrapperHeight="100%"
                maxWidth="780px"
                height="calc((var(--vh, 1vh) * 100) - var(--header-height))"
-               background="center / cover no-repeat url('hero-background.jpg')"
+               background={`center / cover no-repeat url('hero-background.jpg')`}
                zIndex={0}
                overlay="radial-gradient(70% 70% at 50% 100%,#e8e8e8 0,#fafafa 100%)">
         <Container flex={1} justify="center">
