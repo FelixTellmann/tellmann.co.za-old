@@ -21,7 +21,7 @@ export type Props = AppProps
 export const Root: FC<Props> = ({ pageProps, Component }) => {
   const [showHeader, setShowHeader] = useState(false);
   
-  useGlobalEvent("scroll")((e) => setShowHeader(window.scrollY > 400));
+  useGlobalEvent("resize")((e) => document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`));
   
   return (
     <>

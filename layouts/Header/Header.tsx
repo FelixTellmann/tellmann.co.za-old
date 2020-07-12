@@ -267,8 +267,7 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
           }
           
           .nav {
-            height: calc(100vh - var(--header-height));
-            max-height: -webkit-fill-available;
+            height: calc((var(--vh, 1vh) * 100) - var(--header-height));
             padding-top: var(--space-16x);
             padding-bottom: var(--wrapper-padding);
             transition-delay: 0s;

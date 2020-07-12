@@ -10,7 +10,7 @@ const Index: FC = (props) => {
       <Section wrapper
                wrapperHeight="100%"
                maxWidth="780px"
-               height="calc(100vh - var(--header-height));"
+               height="calc((var(--vh, 1vh) * 100) - var(--header-height))"
                background="center / cover no-repeat url('hero-background.jpg')"
                zIndex={0}
                overlay="radial-gradient(70% 70% at 50% 100%,#e8e8e8 0,#fafafa 100%)">
