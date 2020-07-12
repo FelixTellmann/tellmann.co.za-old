@@ -277,6 +277,8 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
           .mobile-nav {
             .mobile-nav__item {
               opacity: 0;
+              pointer-events: none;
+              visibility: hidden;
             }
             
             .nav-lines {
