@@ -67,6 +67,8 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
       
       .logo {
         min-width: 1px;
+        min-height: 100%;
+        max-height: 100%;
         height: 100%;
         display: block;
         padding: var(--space-2x) 0;
@@ -75,6 +77,7 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
         img, svg {
           max-width: 100%;
           height: 100%;
+          min-height: 100%;
           max-height: 100%;
         }
       }
@@ -195,7 +198,6 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
             background-color: var(--color-accent);
           }
         }
-        
         .mobile-nav {
           display: flex;
           align-items: center;
@@ -260,7 +262,6 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
             }
           }
         }
-        
         .header.active {
           color: var(--color-background);
           
