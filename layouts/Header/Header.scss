@@ -23,7 +23,8 @@
     height: 0;
     border-right: solid 1px rgba(var(--color-border-rgb), 0.1);
     background-color: var(--color-text);
-    transition: height var(--transition-4);
+    transition: height var(--transition-8);
+    transition-delay: 0.35s;
   }
   
   &:after {
@@ -35,7 +36,8 @@
     width: 50vw;
     height: 0;
     background-color: var(--color-text);
-    transition: height var(--transition-4);
+    transition: height var(--transition-8);
+    transition-delay: 0.35s;
   }
 }
 
@@ -241,6 +243,7 @@
     &:before, &:after {
       bottom: -20vh;
       height: 250vh;
+      transition-delay: 0s;
     }
     
     .nav {
