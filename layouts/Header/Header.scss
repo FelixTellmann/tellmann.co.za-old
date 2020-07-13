@@ -5,7 +5,7 @@
   left: 0;
   width: 100%;
   height: var(--header-height);
-  background: var(--color-background);
+  background: transparent;
   color: inherit;
   transition-delay: 0.2s;
   
@@ -425,6 +425,7 @@
   .header {
     padding-right: 6rem;
     padding-left: 6rem;
+    background: var(--color-background);
   }
   .nav__contact, .nav__tagline {
     position: fixed;
