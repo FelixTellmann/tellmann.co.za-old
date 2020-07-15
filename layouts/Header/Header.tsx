@@ -470,7 +470,7 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
               color: rgba(var(--color-text-rgb), 0.75);
               font-size: 1.4em;
               font-weight: 400;
-              letter-spacing: 0.075rem;
+              letter-spacing: 0.175rem;
               text-decoration: none;
               text-transform: uppercase;
               

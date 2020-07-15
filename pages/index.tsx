@@ -65,8 +65,8 @@ const Index: FC = (props) => {
                 href="#kidsliving"
                 title="Kids Living"
                 description="shopify - design - development - custom app - growth"
-                color="var(--color-text)"
-                hoverColor="#123123" />
+                color="var(--color-text-fixed)"
+                hoverColor="#4AD94E" />
             </GridItem>
             <GridItem aspect={2 / 3}>
               <ImageHover
@@ -74,8 +74,8 @@ const Index: FC = (props) => {
                 href="#kidsliving"
                 title="Kids Living"
                 description="shopify - design - development - custom app - growth"
-                color="var(--color-text)"
-                hoverColor="#123123" />
+                color="var(--color-background-fixed)"
+                hoverColor="#D23103" />
             </GridItem>
             <GridItem aspect={1 / 1}>
               <ImageHover
@@ -83,8 +83,8 @@ const Index: FC = (props) => {
                 href="#kidsliving"
                 title="Kids Living"
                 description="shopify - design - development - custom app - growth"
-                color="var(--color-text)"
-                hoverColor="#123123" />
+                color="var(--color-background-fixed)"
+                hoverColor="#EF80B3" />
             </GridItem>
             <GridItem aspect={2 / 1} col="span 2">
               <ImageHover
@@ -92,8 +92,8 @@ const Index: FC = (props) => {
                 href="#kidsliving"
                 title="Kids Living"
                 description="shopify - design - development - custom app - growth"
-                color="var(--color-text)"
-                hoverColor="#123123" />
+                color="var(--color-text-fixed)"
+                hoverColor="#FDE2AE" />
             </GridItem>
           </Grid>
         </Container>
