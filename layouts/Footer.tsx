@@ -9,11 +9,11 @@ export const Footer: FC = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-weight: 500;
-          text-transform: uppercase;
-          letter-spacing: 0.075rem;
           color: rgba(var(--color-text-rgb), 0.75);
           font-size: 1.4em;
+          font-weight: 500;
+          letter-spacing: 0.075rem;
+          text-transform: uppercase;
           
           .footer-heart {
             color: red;

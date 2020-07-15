@@ -6,6 +6,7 @@ import Link from "next/link";
 import { IoIosArrowDown } from "react-icons/io";
 import { type } from "os";
 import { Text } from "../components";
+import { SectionHeading, SectionHeadingProps } from "./SectionHeading";
 
 type SectionProps = {
   wrapper?: boolean
@@ -160,31 +161,3 @@ export const Section: FC<SectionProps> = ({ children, jumpTo, heading, height, z
   );
 };
 
-type SectionHeadingProps = {
-  title: string
-  subheading?: string
-}
-
-const SectionHeading: FC<SectionHeadingProps> = ({ title, subheading }) => {
-  
-  return <>
-    <style jsx>{`
-      .section-heading__break {
-        max-width: 24rem;
-        background: var(--color-accent);
-        width: 14rem;
-        height: 0.3rem;
-        display: block;
-        border: 0;
-        margin: var(--space-4x) auto;
-      }
-    
-    `}</style>
-    <Container wrapper maxWidth="var(--wrapper-width-small)" className="section--heading">
-      <Text h2 center noMargin>{title}</Text>
-      <hr className="section-heading__break" />
-      {subheading ? <Text h4 weight="normal" center noMargin>{subheading}</Text> : null}
-      <Spacer y={2} />
-    </Container>
-  </>;
-};

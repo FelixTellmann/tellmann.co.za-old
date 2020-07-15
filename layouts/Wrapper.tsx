@@ -17,6 +17,7 @@ export const Wrapper: FC<WrapperProps> = ({ children, width = "", height = "", s
           width: var(--wrapper-width);
           max-width: 100%;
           display: flex;
+          flex-direction: column;
           margin-right: auto;
           margin-left: auto;
           padding-right: var(--wrapper-padding);

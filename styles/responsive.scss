@@ -1,17 +1,23 @@
 .desktop-only {
   @include responsive('small') {
-    display: none;
+    display: none !important;
   }
 }
 
 .tablet-and-up-only {
   @include responsive('mobile') {
-    display: none;
+    display: none !important;;
   }
 }
 
 .mobile-only {
   @include responsive('tablet-and-up') {
-    display: none;
+    display: none !important;;
+  }
+}
+
+.mobile-and-desktop-only {
+  @include responsive('tablet') {
+    display: none !important;;
   }
 }
