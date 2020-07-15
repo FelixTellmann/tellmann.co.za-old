@@ -12,6 +12,16 @@ module.exports = withSass(withCSS({
           },
         },
         {
+          loader: 'sass-loader',
+          test: /.scss$/,
+          options: {
+            sassOptions: {
+              outputStyle: 'expanded',
+              sourceMap: true,
+            },
+          },
+        },
+        {
           enforce: 'pre',
           test: /.scss$/,
           loader: 'sass-resources-loader',

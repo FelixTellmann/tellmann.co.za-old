@@ -1,17 +1,18 @@
 import { CSSProperties, FC } from "react";
 import { Wrapper } from "layouts";
-import "./Container.scss";
 
-type ContainerProps = {
+type GridProps = {
   wrapper?: boolean | string
   maxWidth?: string
   height?: string
   id?: string
   className?: string
   style?: CSSProperties
+  col?: [number, number, number]
+  row?: [number, number, number]
 }
 
-export const Grid: FC<ContainerProps> = ({ children, maxWidth, height, wrapper, id = "", className = "", style = {} }) => {
+export const Grid: FC<GridProps> = ({ children, maxWidth, height, wrapper, id = "", className = "", style = {} }) => {
   height && (style[`height`] = height);
   
   return (

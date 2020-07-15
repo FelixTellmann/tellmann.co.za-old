@@ -31,19 +31,15 @@ export const Root: FC<Props> = ({ pageProps, Component }) => {
         @import 'styles/mixins';
         
         .main {
-          min-height: 700px;
-          height: calc(100vh);
-          background-color: red;
+          min-height: calc(100vh);
           margin: 0 0 0;
           @include responsive('tablet-and-up') {
-            min-height: 700px;
-            height: calc(100vh - var(--header-height));
+            min-height: calc(100vh - var(--header-height));
             margin: var(--header-height) 0 0;
           }
           @include responsive('desktop') {
-            min-height: 700px;
-            height: calc(100vh - var(--header-height));
-            margin: var(--header-height) 60px 0;
+            min-height: calc(100vh - var(--header-height));
+            margin: var(--header-height) var(--frame-border) 0;
           }
         }
       

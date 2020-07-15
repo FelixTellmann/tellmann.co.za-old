@@ -82,30 +82,31 @@ export const Container: FC<ContainerProps> = (
           --flex-justify-m: ${justify[0]};
         }
     `}</style>
-      <style jsx>{`@import 'styles/mixins';
-      
-      .container {
-        position: relative;
-        min-width: 1px;
-        max-width: 100%;
-        display: flex;
-        flex: var(--flex);
-        @include responsive('desktop') {
-          flex-direction: var(--flex-direction);
-          align-items: var(--flex-align);
-          justify-content: var(--flex-justify);
+      <style jsx>{`
+        @import 'styles/mixins';
+        
+        .container {
+          position: relative;
+          min-width: 1px;
+          max-width: 100%;
+          display: flex;
+          flex: var(--flex);
+          @include responsive('desktop') {
+            flex-direction: var(--flex-direction);
+            align-items: var(--flex-align);
+            justify-content: var(--flex-justify);
+          }
+          @include responsive('tablet') {
+            flex-direction: var(--flex-direction-t);
+            align-items: var(--flex-align-t);
+            justify-content: var(--flex-justify-t);
+          }
+          @include responsive('mobile') {
+            flex-direction: var(--flex-direction-m);
+            align-items: var(--flex-align-m);
+            justify-content: var(--flex-justify-m);
+          }
         }
-        @include responsive('tablet') {
-          flex-direction: var(--flex-direction-t);
-          align-items: var(--flex-align-t);
-          justify-content: var(--flex-justify-t);
-        }
-        @include responsive('mobile') {
-          flex-direction: var(--flex-direction-m);
-          align-items: var(--flex-align-m);
-          justify-content: var(--flex-justify-m);
-        }
-      }
       
       
       `}</style>

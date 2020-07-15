@@ -30,7 +30,7 @@ h2 { --size: 5.6rem; --size-t: 4.8rem; --size-m: 3.2rem;}
 
 h3 { --size: 4rem; --size-t: 3.2rem; --size-m: 2.8rem;}
 
-h4 { --size: 2rem; --size-t: 2rem; --size-m: 2rem;}
+h4 { --size: 2rem; --size-t: 2rem; --size-m: 1.6rem;}
 
 h5 { --size: 2.4rem; --size-t: 2.4rem; --size-m: 2rem;}
 
@@ -60,6 +60,7 @@ small { --size: 1.4rem; --size-t: 1.4rem; --size-m: 1.4rem;}
 
   /*================ Frame, Header, Footer ================*/
   --wrapper-width: 120rem;
+  --wrapper-width-small: 78rem;
   --wrapper-padding: var(--gap);
   --frame-border: 6rem;
   --header-height: 10rem;

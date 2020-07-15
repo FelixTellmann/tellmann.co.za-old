@@ -6,7 +6,14 @@
                 "preset-env": { },
                 "styled-jsx": {
                     "plugins": [
-                        "styled-jsx-plugin-sass"
+                        [
+                            "styled-jsx-plugin-sass",
+                            {
+                                "sassOptions": {
+                                    "outputStyle": "nested"
+                                }
+                            }
+                        ]
                     ]
                 }
             }
