@@ -4,7 +4,6 @@ import { Text, Button, Card, ImageHover, Testimonial, TestimonialItem, Border } 
 import Link from "next/link";
 import Fade from "react-reveal/Fade";
 
-
 const Index: FC = (props) => {
   const [LoadContactBorder, setLoadContactBorder] = useState(false);
   
@@ -220,7 +219,8 @@ const Index: FC = (props) => {
       <Section wrapper
                id="contact"
                background={{ background: "center / cover no-repeat url('topography.svg')", style: { opacity: 0.05 } }}
-               spacing={6}>
+               spacing={6}
+               jumpTo={{ title: "Looking for more info?", href: "#footer" }}>
         <style jsx>{`
           @import 'styles/mixins';
           

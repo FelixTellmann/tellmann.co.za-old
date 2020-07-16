@@ -126,32 +126,35 @@ export const Testimonial: FC<TestimonialProps> = ({ id = "", className = "", sty
             width: 48px;
             
             & .testimonial__navigation__item {
-              width: 50%;
+              width: 100%;
               padding: 12px 0;
               cursor: pointer;
               position: relative;
               opacity: 0.5;
-              transition: 0.2s ease-in-out;
               
               &:before {
                 position: absolute;
                 content: '';
-                width: 100%;
+                width: 50%;
                 height: 2px;
                 background: var(--color-text);
+                transition: 0.2s ease-in-out;
               }
               
               &:hover, &:focus, &:active {
                 opacity: 0.7;
-                width: 100%;
+                
+                &:before {
+                  width: 100%;
+                }
               }
               
               &.active {
-                width: 100%;
                 opacity: 1;
                 
                 &:before {
-                  background: var(--color-accent)
+                  background: var(--color-accent);
+                  width: 100%;
                 }
               }
             }
@@ -165,17 +168,19 @@ export const Testimonial: FC<TestimonialProps> = ({ id = "", className = "", sty
               display: flex;
               & .testimonial__navigation__item {
                 width: auto;
-                height: 50%;
+                height: 100%;
                 padding: 0 12px;
                 
                 &:before {
                   width: 2px;
-                  height: 100%;
+                  height: 50%;
                 }
                 
                 &:hover, &:focus, &:active, &.active {
-                  width: 2px;
-                  height: 100%;
+                  &:before {
+                    width: 2px;
+                    height: 100%;
+                  }
                 }
               }
             }
