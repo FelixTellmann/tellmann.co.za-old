@@ -5,3 +5,6 @@ export * from "./Typed";
 export * from "./Text";
 export * from "./Card";
 export * from "./ImageHover";
+export * from "./Testimonials";
+export * from "./TestimonialItem";
+export * from "./Border";

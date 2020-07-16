@@ -1,5 +1,5 @@
 import { FC, createElement, StyleHTMLAttributes, CSSProperties } from "react";
-import { TextAlignProperty } from "csstype";
+import { MarginBottomProperty, MarginTopProperty, TextAlignProperty } from "csstype";
 
 type TextItemProps = {
   /*element type*/
@@ -24,6 +24,8 @@ type TextItemProps = {
   center?: boolean
   maxWidth?: string
   noMargin?: boolean
+  marginBottom?: MarginBottomProperty<string>
+  marginTop?: MarginTopProperty<string>
   align?: TextAlignProperty | TextAlignProperty[]
   y?: number
   x?: number
@@ -38,22 +40,23 @@ type TextItemProps = {
   
 }
 
-export const Text: FC<TextItemProps> = ({ style = {}, align = "unset", ...props }) => {
-  const { lineHeight, className, highlight, uppercase, color, weight, center, maxWidth, noMargin, secondary, x, y } = props;
+export const Text: FC<TextItemProps> = ({ style = {}, align = "unset", className,marginTop, marginBottom, ...props }) => {
+  const { lineHeight, highlight, uppercase, color, weight, center, maxWidth, noMargin, secondary, x, y } = props;
   const elements = ["h1", "h2", "h3", "h4", "h5", "h6", "p", "span", "small", "div"];
   let element = "";
   
   uppercase && (style["textTransform"] = "uppercase");
   color && (style["color"] = color);
-  highlight && (style["fontSize"] = "var(--size-highlight)");
   highlight && (style["letterSpacing"] = "var(--size-highlight-letter-spacing)");
   lineHeight && (style["lineHeight"] = lineHeight);
   weight && (style["fontWeight"] = weight);
   center && (style["textAlign"] = "center");
   maxWidth && (style["maxWidth"] = maxWidth);
   noMargin && (style["marginTop"] = 0, style["marginBottom"] = 0);
+  marginBottom && (style["marginBottom"] = marginBottom);
+  marginTop && (style["marginTop"] = marginTop);
   (y || x) && (style["padding"] = `calc(var(--gap) * var(--gap-ratio-y)) calc(var(--gap) * var(--gap-ratio-x))`, style["--gap-ratio-y"] = y || 0, style["--gap-ratio-x"] = x || 0);
-  
+  highlight && (className = className ? className + ' highlight' : 'highlight')
   if (typeof align === "string") {
     align = [align, align, align];
     

@@ -2,14 +2,15 @@ import { CSSProperties, FC } from "react";
 
 type WrapperProps = {
   width?: string
+  noPadding?: boolean
   style?: CSSProperties
   height?: string
 }
 
-export const Wrapper: FC<WrapperProps> = ({ children, width = "", height = "", style = {} }) => {
+export const Wrapper: FC<WrapperProps> = ({ children, width = "", height = "",noPadding, style = {} }) => {
   width && (style["width"] = width);
   height && (style["height"] = height);
-  
+  noPadding && (style["padding"] = 0);
   return (
     <>
       <style jsx global>{`

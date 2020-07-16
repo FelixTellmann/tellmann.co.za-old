@@ -24,6 +24,7 @@ type SectionProps = {
   top?: number
   bottom?: number
   spacing?: number
+  noPadding?: boolean
   background?: { background: BackgroundProperty<string>, style?: CSSProperties }
   zIndex?: ZIndexProperty
   position?: PositionProperty
@@ -37,7 +38,7 @@ type SectionProps = {
   jumpTo?: { title: string, href: string, position?: BottomProperty<string> | [BottomProperty<string>, BottomProperty<string>, BottomProperty<string>] }
 }
 
-export const Section: FC<SectionProps> = ({ children, jumpTo, heading, height, minHeight, zIndex, overlay, line, wrapper, wrapperHeight, maxWidth, position, background, top = 3, bottom = 3, spacing, id = "", className = "", style = {} }) => {
+export const Section: FC<SectionProps> = ({ children, jumpTo, noPadding, heading, height, minHeight, zIndex, overlay, line, wrapper, wrapperHeight, maxWidth, position, background, top = 3, bottom = 3, spacing, id = "", className = "", style = {} }) => {
   
   (spacing || spacing === 0) && (top = spacing, bottom = spacing);
   background?.background && (style["--section-background"] = background.background);
@@ -74,6 +75,7 @@ export const Section: FC<SectionProps> = ({ children, jumpTo, heading, height, m
         .section__background {
           position: absolute;
           top: 0;
+          z-index: -1;
           left: 0;
           width: 100%;
           height: 100%;
@@ -163,6 +165,7 @@ export const Section: FC<SectionProps> = ({ children, jumpTo, heading, height, m
         {wrapper
          ? <Wrapper width={maxWidth && maxWidth}
                     height={wrapperHeight && wrapperHeight}
+                    noPadding={noPadding}
                     style={{ position: "relative" }}>{children}</Wrapper>
          : children}
       </section>

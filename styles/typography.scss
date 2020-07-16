@@ -14,6 +14,16 @@ html {
 
 a {
   color: inherit;
+  
+  &:hover, &:focus, &:active {
+    color: var(--color-accent);
+  }
+}
+
+.nav a {
+  &:hover, &:focus, &:active {
+    color: inherit;
+  }
 }
 
 p {
@@ -37,10 +47,6 @@ h1, h2, h3, h4, h5, h6, p, small {
   @include responsive('mobile') {
     font-size: var(--size-m)
   }
-
-  &.highlight {
-    font-size: var(--size-highlight);
-  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -48,7 +54,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 hr {
-  width: 100%/*calc(100% - var(--space-16x))*/;
+  width: 100% /*calc(100% - var(--space-16x))*/
+;
   max-width: 100%;
   height: 0.2rem;
   display: block;

@@ -5,6 +5,7 @@ import LogoSvg from "public/logo3-28.svg";
 import Link from "next/link";
 import { Text } from "components";
 /*import './Header.scss';*/
+import { useGlobalEvent } from "beautiful-react-hooks";
 
 type HeaderProps = {
   logo: { href: string, src: string, alt?: string }
@@ -21,6 +22,12 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
                                                                        ? !showMobileHeader
                                                                        : showMobileHeader);
   
+  const [isHeaderScrolledDown, setIsheaderScrolledDown] = useState(false);
+  
+  useGlobalEvent("scroll")((event) => {
+    setIsheaderScrolledDown(window.scrollY > 0);
+  });
+  
   return (
     <>
       <style jsx>{`
@@ -36,6 +43,15 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
           background: transparent;
           color: inherit;
           transition-delay: 0.2s;
+          
+          &.scrolled-down {
+            @include responsive('small') {
+              background-color: rgba(var(--color-background-rgb), 0.7);
+              transition: 0.1s ease-in;
+              backdrop-filter: saturate(180%) blur(5px);
+              box-shadow: 0px -1px 0px 0px inset rgba(0, 0, 0, 0.15);
+            }
+          }
           
           a {
             text-decoration: none;
@@ -496,7 +512,8 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
           }
         }
       `}</style>
-      <header className={`header ${showMobileHeader ? "active" : ""}`} style={style}>
+      <header className={`header ${showMobileHeader ? "active" : ""} ${isHeaderScrolledDown ? "scrolled-down" : ""}`}
+              style={style}>
         <Container wrapper align="center" justify="space-between" row>
           {/*================ LOGO ================*/}
           <Link href={logo.href}>

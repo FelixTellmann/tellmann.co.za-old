@@ -33,6 +33,7 @@ export const Root: FC<Props> = ({ pageProps, Component }) => {
         .main {
           min-height: calc(100vh);
           margin: 0 0 0;
+          overflow: hidden;
           @include responsive('tablet-and-up') {
             min-height: calc(100vh - var(--header-height));
             margin: var(--header-height) 0 0;

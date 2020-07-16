@@ -1,8 +1,13 @@
 import React, { FC, useState } from "react";
 import { Section, Container, Grid, Spacer, SectionHeading, GridItem } from "layouts";
-import { Text, Button, Card, ImageHover } from "../components";
+import { Text, Button, Card, ImageHover, Testimonial, TestimonialItem, Border } from "../components";
+import Link from "next/link";
+import Fade from "react-reveal/Fade";
+
 
 const Index: FC = (props) => {
+  const [LoadContactBorder, setLoadContactBorder] = useState(false);
+  
   return (
     <>
       {/*================ Hero Section ================*/}
@@ -57,7 +62,8 @@ const Index: FC = (props) => {
                         id="portfolio" />
       </Section>
       {/*================ Portfolio Section ================*/}
-      <Section spacing={0}>
+      <Section id="portfolio-section"
+               spacing={0}>
         <Container flex={1} justify="center">
           <Grid col={[3, 3, 3]} gap={[0, 0, 0]} row={[2, 2, 2]}>
             <GridItem aspect={4 / 3} col="1 / span 2">
@@ -102,30 +108,31 @@ const Index: FC = (props) => {
       {/*================ Who we are Section  ================*/}
       <Section wrapper
                top={2}
-               bottom={2}
+               bottom={8}
                id="who_we_are"
+               jumpTo={{ title: "What people say about us", href: "#testimonials" }}
                background={{ background: "center / cover no-repeat url('topography.svg')", style: { opacity: 0.05 } }}>
         <Container justify="center">
           <Button title="Get in touch" href="#contact" />
           <Spacer y={2} />
           <Grid col={[1, 1, 2]} gap={[4, 4, 4]}>
-            <GridItem >
+            <GridItem>
               <Container maxWidth="60rem">
-                <Text h5 style={{marginBottom: 0}}>Who we are</Text>
+                <Text h5 style={{ marginBottom: 0 }}>Who we are</Text>
                 <Text p> We take a relationship-centric approach to our work, and will never make you feel like simply a
                   transaction. Our projects are partnerships and as such we are here to assist you along the way,
                   refining where necessary to create the best possible experience for your customers.</Text>
                 <hr style={{ marginLeft: 0 }} />
               </Container>
               <Container maxWidth="60rem">
-                <Text h5 style={{marginBottom: 0}}>Who we are</Text>
+                <Text h5 style={{ marginBottom: 0 }}>Who we are</Text>
                 <Text p> We take a relationship-centric approach to our work, and will never make you feel like simply a
                   transaction. Our projects are partnerships and as such we are here to assist you along the way,
                   refining where necessary to create the best possible experience for your customers.</Text>
                 <hr style={{ marginLeft: 0 }} />
               </Container>
               <Container maxWidth="60rem">
-                <Text h5 style={{marginBottom: 0}}>Who we are</Text>
+                <Text h5 style={{ marginBottom: 0 }}>Who we are</Text>
                 <Text p> We take a relationship-centric approach to our work, and will never make you feel like simply a
                   transaction. Our projects are partnerships and as such we are here to assist you along the way,
                   refining where necessary to create the best possible experience for your customers.</Text>
@@ -141,6 +148,127 @@ const Index: FC = (props) => {
         </Container>
       </Section>
       {/*================ Testimonials ================*/}
+      <Section id="testimonials"
+               wrapper
+               maxWidth="var(--wrapper-width-small)"
+               spacing={6}
+               background={{ background: `center / cover no-repeat url('lovebus.jpg')`, style: { opacity: 0.2 } }}>
+        <Testimonial>
+          <TestimonialItem>
+            <Text h3 highlight noMargin>Amazing</Text>
+            <Grid col={[1, 3, 3]}>
+              <GridItem col="2 / span 2">
+                <Text h4 align="right" weight="normal">
+                  Best review for anybody that anyone can imagine. Lets think about this for a moment. those two have
+                  done the best job I could ever think of! wow and Alpha, the best!!!!<br />
+                  <Link href="#read-more-link"><a>view project</a></Link>
+                </Text>
+              </GridItem>
+            </Grid>
+          </TestimonialItem>
+          <TestimonialItem>
+            <Text h3 highlight noMargin>Amazing</Text>
+            <Grid col={[1, 3, 3]}>
+              <GridItem col="2 / span 2">
+                <Text h4 align="right" weight="normal">
+                  Best review for anybody that anyone can imagine. Lets think about this for a moment. those two have
+                  done the best job I could ever think of! wow and Alpha, the best!!!!<br />
+                  <Link href="#read-more-link"><a>view project</a></Link>
+                </Text>
+              </GridItem>
+            </Grid>
+          </TestimonialItem>
+          <TestimonialItem>
+            <Text h3 highlight noMargin>Amazing</Text>
+            <Grid col={[1, 3, 3]}>
+              <GridItem col="2 / span 2">
+                <Text h4 align="right" weight="normal">
+                  Best review for anybody that anyone can imagine. Lets think about this for a moment. those two have
+                  done the best job I could ever think of! wow and Alpha, the best!!!!<br />
+                  <Link href="#read-more-link"><a>view project</a></Link>
+                </Text>
+              </GridItem>
+            </Grid>
+          </TestimonialItem>
+          <TestimonialItem>
+            <Text h3 highlight noMargin>Amazing</Text>
+            <Grid col={[1, 3, 3]}>
+              <GridItem col="2 / span 2">
+                <Text h4 align="right" weight="normal">
+                  Best review for anybody that anyone can imagine. Lets think about this for a moment. those two have
+                  done the best job I could ever think of! wow and Alpha, the best!!!!<br />
+                  <Link href="#read-more-link"><a>view project</a></Link>
+                </Text>
+              </GridItem>
+            </Grid>
+          </TestimonialItem>
+          <TestimonialItem>
+            <Text h3 highlight noMargin>Amazing</Text>
+            <Grid col={[1, 3, 3]}>
+              <GridItem col="2 / span 2">
+                <Text h4 align="right" weight="normal">
+                  Best review for anybody that anyone can imagine. Lets think about this for a moment. those two have
+                  done the best job I could ever think of! wow and Alpha, the best!!!!<br />
+                  <Link href="#read-more-link"><a>view project</a></Link>
+                </Text>
+              </GridItem>
+            </Grid>
+          </TestimonialItem>
+        </Testimonial>
+      </Section>
+      {/*================ Contact Section  ================*/}
+      <Section wrapper
+               id="contact"
+               background={{ background: "center / cover no-repeat url('topography.svg')", style: { opacity: 0.05 } }}
+               spacing={6}>
+        <style jsx>{`
+          @import 'styles/mixins';
+          
+          .custom-effect {
+            width: calc((100% - var(--wrapper-padding) * 2) - ((100% - var(--wrapper-padding) * 2) - var(--wrapper-width-small)) / 2);
+            max-width: calc(100% - var(--wrapper-padding) * 2);
+            right: var(--wrapper-padding);
+            margin: var(gap);
+            height: 100%;
+            position: absolute;
+            
+            &:before {
+              position: absolute;
+              content: '';
+              height: 60%;
+              top: 50%;
+              width: 40rem;
+              background: center/cover no-repeat url(lovebus.jpg);
+              transform: translate(-50%, -50%);
+              z-index: 1;
+              @include responsive('small') {
+                height: 24vw;
+                top: 90%;
+                right: -10%;
+                width: 37vw;
+              }
+              @include responsive('mobile') {
+                display: none;
+              }
+            }
+          }
+        `}</style>
+        <Fade duration={1600} delay={1} onReveal={() => setTimeout(() => { setLoadContactBorder(true); }, 800)}>
+          <div className="custom-effect">{LoadContactBorder
+                                          ? <Border loading={true} width="6px" duration={6} />
+                                          : null}</div>
+        </Fade>
+        <Grid col={[1, 1, 12]}>
+          <GridItem col="6 / span 7" aspect={0}>
+            <Spacer y={4} />
+            <SectionHeading title="Lets make it happen"
+                            align="left"
+                            subheading="More customers, higher conversion rates, and increased revenue–what’s not to like? Schedule a FREE consultation with one of our e-commerce specialists today."
+                            button={{ title: "Get in touch", href: "#contact", secondary: true }} />
+          </GridItem>
+        </Grid>
+      
+      </Section>
     </>
   );
 };

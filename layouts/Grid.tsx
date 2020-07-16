@@ -1,6 +1,5 @@
 import { CSSProperties, FC } from "react";
 
-
 type GridProps = {
   id?: string
   className?: string
@@ -10,19 +9,25 @@ type GridProps = {
   gap?: [number, number, number]
 }
 
-export const Grid: FC<GridProps> = ({ children, col = [1, 1, 1], row = [1, 1, 1], gap = [1, 1, 1], id = "", className = "", style = {} }) => {
+export const Grid: FC<GridProps> = ({ children, col, row, gap, id = "", className = "", style = {} }) => {
   
-  style["--grid-template-col"] = col[2];
-  style["--grid-template-col-t"] = col[1];
-  style["--grid-template-col-m"] = col[0];
+  if (col?.length === 3) {
+    style["--grid-template-col"] = col[2];
+    style["--grid-template-col-t"] = col[1];
+    style["--grid-template-col-m"] = col[0];
+  }
   
-  style["--grid-template-row"] = row[2];
-  style["--grid-template-row-t"] = row[1];
-  style["--grid-template-row-m"] = row[0];
+  if (row?.length === 3) {
+    style["--grid-template-row"] = row[2];
+    style["--grid-template-row-t"] = row[1];
+    style["--grid-template-row-m"] = row[0];
+  }
   
-  style["--grid-gap"] = gap[2];
-  style["--grid-gap-t"] = gap[1];
-  style["--grid-gap-m"] = gap[0];
+  if (gap?.length === 3) {
+    style["--grid-gap"] = gap[2];
+    style["--grid-gap-t"] = gap[1];
+    style["--grid-gap-m"] = gap[0];
+  }
   
   return (
     <>
