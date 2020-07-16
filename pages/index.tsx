@@ -10,6 +10,7 @@ const Index: FC = (props) => {
                wrapperHeight="100%"
                maxWidth="var(--wrapper-width-small)"
                height="calc((var(--vh, 1vh) * 100) - var(--header-height))"
+               minHeight="73.6rem"
                background={{ background: "center / cover no-repeat url('hero-background.jpg')" }}
                overlay={{ background: "radial-gradient(70% 70% at 50% 100%,#e8e8e8 0,#fafafa 100%)", style: { opacity: 0.8 } }}
                jumpTo={{ title: "what we do", href: "#what_we_do" }}>
@@ -100,31 +101,44 @@ const Index: FC = (props) => {
       </Section>
       {/*================ Who we are Section  ================*/}
       <Section wrapper
-               top={4}
-               bottom={0}
-               id="what_we_do"
-               background={{ background: "center / cover no-repeat url('topography.svg')", style: { opacity: 0.05 } }}
-               heading={{ title: "What we do", subheading: "As one of the top-reviewed Shopify & Shopify Plus experts, our team of skilled designers and developers bring years of experience to the table. We partner with brands to bring their stories to life through creative design, innovative thinking, and a heck of a lot of passion." }}
-               jumpTo={{ title: "Our Work", href: "#portfolio", position: ["35rem", "38rem", "40rem"] }}>
-        
-        <Container flex={1} justify="center">
-          <Grid col={[1, 2, 3]} gap={[2, 2, 2]}>
-            <Card icon={{ src: "design.svg", alt: "Design Icon" }}
-                  title="Design"
-                  description="A strong visual and verbal message that communicates the value of your company.  One that is recognizable, relatable, and builds trust with your customer. " />
-            <Card icon={{ src: "develop.svg", alt: "Develop Icon" }}
-                  title="Development"
-                  description="A strong visual and verbal message that communicates the value of your company.  One that is recognizable, relatable, and builds trust with your customer. " />
-            <Card icon={{ src: "branding.svg", alt: "Growth Icon" }}
-                  title="Growth"
-                  description="A strong visual and verbal message that communicates the value of your company.  One that is recognizable, relatable, and builds trust with your customer. "
-                  className="mobile-and-desktop-only" />
+               top={2}
+               bottom={2}
+               id="who_we_are"
+               background={{ background: "center / cover no-repeat url('topography.svg')", style: { opacity: 0.05 } }}>
+        <Container justify="center">
+          <Button title="Get in touch" href="#contact" />
+          <Spacer y={2} />
+          <Grid col={[1, 1, 2]} gap={[4, 4, 4]}>
+            <GridItem >
+              <Container maxWidth="60rem">
+                <Text h5 style={{marginBottom: 0}}>Who we are</Text>
+                <Text p> We take a relationship-centric approach to our work, and will never make you feel like simply a
+                  transaction. Our projects are partnerships and as such we are here to assist you along the way,
+                  refining where necessary to create the best possible experience for your customers.</Text>
+                <hr style={{ marginLeft: 0 }} />
+              </Container>
+              <Container maxWidth="60rem">
+                <Text h5 style={{marginBottom: 0}}>Who we are</Text>
+                <Text p> We take a relationship-centric approach to our work, and will never make you feel like simply a
+                  transaction. Our projects are partnerships and as such we are here to assist you along the way,
+                  refining where necessary to create the best possible experience for your customers.</Text>
+                <hr style={{ marginLeft: 0 }} />
+              </Container>
+              <Container maxWidth="60rem">
+                <Text h5 style={{marginBottom: 0}}>Who we are</Text>
+                <Text p> We take a relationship-centric approach to our work, and will never make you feel like simply a
+                  transaction. Our projects are partnerships and as such we are here to assist you along the way,
+                  refining where necessary to create the best possible experience for your customers.</Text>
+                <hr style={{ marginLeft: 0 }} />
+              </Container>
+            </GridItem>
+            <Container justify={"center"} className="desktop-only">
+              <img src="who-we-are.jpg"
+                   alt="Who we are Image"
+                   style={{ maxHeight: `100%`, maxWidth: `100%`, width: `100%` }} />
+            </Container>
           </Grid>
         </Container>
-        <Spacer y={14} />
-        <SectionHeading title="We specialize in Shopify"
-                        subheading="Accelerating growth of Lifestyle brands with the right strategy and proven methodologies."
-                        id="portfolio" />
       </Section>
       {/*================ Testimonials ================*/}
     </>

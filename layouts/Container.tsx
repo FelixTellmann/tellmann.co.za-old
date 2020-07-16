@@ -68,6 +68,7 @@ export const Container: FC<ContainerProps> = (
   }
   
   height && (style["height"] = height);
+  maxWidth && (style["maxWidth"] = maxWidth, style["marginLeft"] = 'auto', style["marginRight"] = 'auto');
   zIndex && (style["zIndex"] = zIndex);
   
   return (

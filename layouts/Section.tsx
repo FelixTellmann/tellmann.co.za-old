@@ -1,7 +1,14 @@
 import { CSSProperties, FC } from "react";
 
 import { Container, Spacer, Wrapper } from "layouts";
-import { BackgroundColorProperty, BackgroundProperty, BottomProperty, PositionProperty, ZIndexProperty } from "csstype";
+import {
+  BackgroundColorProperty,
+  BackgroundProperty,
+  BottomProperty, HeightProperty,
+  MinHeightProperty,
+  PositionProperty,
+  ZIndexProperty
+} from "csstype";
 import Link from "next/link";
 import { IoIosArrowDown } from "react-icons/io";
 import { type } from "os";
@@ -11,7 +18,8 @@ import { SectionHeading, SectionHeadingProps } from "./SectionHeading";
 type SectionProps = {
   wrapper?: boolean
   wrapperHeight?: string
-  height?: string
+  height?: HeightProperty<string>
+  minHeight?: MinHeightProperty<string>
   maxWidth?: string
   top?: number
   bottom?: number
@@ -29,13 +37,14 @@ type SectionProps = {
   jumpTo?: { title: string, href: string, position?: BottomProperty<string> | [BottomProperty<string>, BottomProperty<string>, BottomProperty<string>] }
 }
 
-export const Section: FC<SectionProps> = ({ children, jumpTo, heading, height, zIndex, overlay, line, wrapper, wrapperHeight, maxWidth, position, background, top = 3, bottom = 3, spacing, id = "", className = "", style = {} }) => {
+export const Section: FC<SectionProps> = ({ children, jumpTo, heading, height, minHeight, zIndex, overlay, line, wrapper, wrapperHeight, maxWidth, position, background, top = 3, bottom = 3, spacing, id = "", className = "", style = {} }) => {
   
   (spacing || spacing === 0) && (top = spacing, bottom = spacing);
   background?.background && (style["--section-background"] = background.background);
   position && (style["position"] = position);
   overlay?.background && (style["--section-overlay"] = overlay.background);
   height && (style["height"] = height);
+  minHeight && (style["minHeight"] = minHeight);
   zIndex && (style["zIndex"] = zIndex);
   jumpTo && (style["--section-jump-to-position"] = jumpTo.position || 0, style["--section-jump-to-position-t"] = jumpTo.position || 0, style["--section-jump-to-position-m"] = jumpTo.position || 0);
   
