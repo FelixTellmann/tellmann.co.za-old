@@ -243,7 +243,7 @@ const Index: FC = (props) => {
               z-index: 1;
               @include responsive('small') {
                 height: 24vw;
-                top: 90%;
+                top: 85%;
                 right: -10%;
                 width: 37vw;
               }
@@ -255,7 +255,7 @@ const Index: FC = (props) => {
         `}</style>
         <Fade duration={1600} delay={1} onReveal={() => setTimeout(() => { setLoadContactBorder(true); }, 800)}>
           <div className="custom-effect">{LoadContactBorder
-                                          ? <Border loading={true} width="6px" duration={6} />
+                                          ? <Border loading={true} width="6px" duration={3} />
                                           : null}</div>
         </Fade>
         <Grid col={[1, 1, 12]}>

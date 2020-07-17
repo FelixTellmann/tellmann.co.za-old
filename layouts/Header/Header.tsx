@@ -4,7 +4,6 @@ import { Container } from "layouts/Container";
 import LogoSvg from "public/logo3-28.svg";
 import Link from "next/link";
 import { Text } from "components";
-/*import './Header.scss';*/
 import { useGlobalEvent } from "beautiful-react-hooks";
 
 type HeaderProps = {
