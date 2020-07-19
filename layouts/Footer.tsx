@@ -26,13 +26,13 @@ export const Footer: FC<FooterProps> = ({ partners, children }) => {
     <>
       <style jsx global>{`
         @import 'styles/mixins';
-        
+
         .footer {
           padding-left: var(--gap);
           padding-right: var(--gap);
           background: var(--color-text-fixed);
         }
-        
+
         .partners {
           position: relative;
           height: 100%;
@@ -40,14 +40,14 @@ export const Footer: FC<FooterProps> = ({ partners, children }) => {
           overflow: hidden;
           left: 50%;
           transform: translate(-50%, 0);
-          
+
           .partners__space-filler {
             opacity: 0;
             pointer-events: none;
             position: relative;
             z-index: -1;
           }
-          
+
           .partners__banner {
             position: absolute;
             height: 100%;
@@ -57,29 +57,33 @@ export const Footer: FC<FooterProps> = ({ partners, children }) => {
             display: flex;
             flex-wrap: nowrap;
           }
-          
+
           @keyframes partners-slider {
             from {transform: translate(0, 0)}
             to {transform: translate(-100%, 0)}
           }
-          
+
           .partners__animation {
             @include responsive-max(1350px) {
               animation: partners-slider 30s linear infinite
             }
           }
-          
+
           .partners__item {
             filter: grayscale(1);
             opacity: 0.8;
             cursor: pointer;
-            
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            max-height: 100%;
+
             &:hover, &:focus, &:active {
               filter: none;
             }
           }
         }
-        
+
         .frame-footer {
           height: var(--frame-border);
           display: flex;
@@ -90,7 +94,7 @@ export const Footer: FC<FooterProps> = ({ partners, children }) => {
           font-weight: 500;
           letter-spacing: 0.075rem;
           text-transform: uppercase;
-          
+
           .frame-footer__heart {
             color: red;
             font-size: 24px
