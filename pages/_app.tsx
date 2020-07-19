@@ -85,6 +85,12 @@ export const Root: FC<Props> = ({ pageProps, Component }) => {
                 { title: "Shopify Features", href: "#about" },
                 { title: "Ecommerce Websites", href: "#about" },
                 { title: "Ecommerce Lessons", href: "#about" },
+              ]
+            },
+            {
+              title: "\u00A0",
+              responsive: ["col", "col", "hidden"],
+              items: [
                 { title: "Who we are", href: "#about" },
                 { title: "Sell online", href: "#about" },
                 { title: "Shopify Features", href: "#about" },
@@ -92,14 +98,6 @@ export const Root: FC<Props> = ({ pageProps, Component }) => {
                 { title: "Ecommerce Lessons", href: "#about" },
                 { title: "Who we are", href: "#about" },
                 { title: "Sell online", href: "#about" },
-                { title: "Shopify Features", href: "#about" },
-                { title: "Ecommerce Websites", href: "#about" },
-                { title: "Ecommerce Lessons", href: "#about" },
-                { title: "Who we are", href: "#about" },
-                { title: "Sell online", href: "#about" },
-                { title: "Shopify Features", href: "#about" },
-                { title: "Ecommerce Websites", href: "#about" },
-                { title: "Ecommerce Lessons", href: "#about" }
               ]
             },
             {
