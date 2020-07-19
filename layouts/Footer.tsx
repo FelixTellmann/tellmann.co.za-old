@@ -1,4 +1,4 @@
-import React, { FC, Children } from "react";
+import React, { FC, Children, createElement } from "react";
 import { Section } from "./Section";
 import { SectionHeading } from "./SectionHeading";
 import { Button, Text } from "../components";
@@ -6,6 +6,8 @@ import { Spacer } from "./Spacer";
 import { Container } from "./Container";
 import { Grid } from "./Grid";
 import Link from "next/link";
+import { GridItem } from "./GridItem";
+import LogoSvg from "../public/logo3-28.svg";
 
 export type FooterProps = {
   logo: { href: string, src: string, alt?: string }
@@ -22,7 +24,7 @@ export type FooterProps = {
   copyright: string
 }
 
-export const Footer: FC<FooterProps> = ({ partners, children, nav }) => {
+export const Footer: FC<FooterProps> = ({ partners, children, nav, contactNav, copyright, logo }) => {
   return (
     <>
       <style jsx global>{`
@@ -38,6 +40,12 @@ export const Footer: FC<FooterProps> = ({ partners, children, nav }) => {
 
           &:last-of-type {
             border-right: solid 1px rgba(var(--color-border-rgb), 0.1);
+          }
+        }
+
+        @include responsive('mobile') {
+          .footer__background__item:nth-of-type(-n+3) {
+            display: none;
           }
         }
 
@@ -66,17 +74,6 @@ export const Footer: FC<FooterProps> = ({ partners, children, nav }) => {
             flex-wrap: nowrap;
           }
 
-          @keyframes partners-slider {
-            from {transform: translate(0, 0)}
-            to {transform: translate(-100%, 0)}
-          }
-
-          .partners__animation {
-            @include responsive-max(1350px) {
-              animation: partners-slider 30s linear infinite
-            }
-          }
-
           .partners__item {
             filter: grayscale(1);
             opacity: 0.8;
@@ -90,6 +87,15 @@ export const Footer: FC<FooterProps> = ({ partners, children, nav }) => {
               filter: none;
             }
           }
+        }
+
+        @keyframes partners-slider {
+          from {transform: translate(0, 0)}
+          to {transform: translate(-100%, 0)}
+        }
+
+        .partners__animation {
+          animation: partners-slider 30s linear infinite
         }
 
         .frame-footer {
@@ -110,6 +116,8 @@ export const Footer: FC<FooterProps> = ({ partners, children, nav }) => {
         }
 
         .footer {
+          color: var(--color-background-fixed);
+
           .nav {
             display: flex;
             flex-direction: column;
@@ -128,6 +136,51 @@ export const Footer: FC<FooterProps> = ({ partners, children, nav }) => {
               &:hover, &:focus, &:active {
                 opacity: 1;
                 color: var(--color-accent);
+              }
+            }
+          }
+
+          .contact-nav {
+            padding: 0 calc(var(--gap) / 2);
+            font-size: 2.2rem;
+            position: relative;
+
+            .contact-nav__item {
+              color: var(--color-background-fixed);
+              margin-right: var(--space-2x);
+              transition: var(--transition-2);
+
+              &:hover, &:focus, &:active {
+                color: var(--color-accent);
+              }
+            }
+          }
+
+          .copyright {
+            padding: 0 calc(var(--gap) / 2);
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+          }
+
+          .logo {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 100%;
+            color: var(--color-background-fixed);
+            padding: 0 calc(var(--gap) / 2);
+            transition: var(--transition-2);
+            bottom: -1.8rem;
+
+            .st4 {
+              transition: var(--transition-2);
+            }
+
+            &:hover, &:focus, &:active {
+              color: var(--color-accent);
+
+              .st4 {
+                fill: var(--color-background-fixed);
               }
             }
           }
@@ -187,16 +240,15 @@ export const Footer: FC<FooterProps> = ({ partners, children, nav }) => {
                  id="footer_nav"
                  style={{ color: "var(--color-background-fixed)", overflow: "hidden" }}>
           <Grid col={[2, 5, 5]}>
-            {nav.map(({ title, responsive, items }) => <>
-                <nav className="nav">
-                  <h6 className="nav__heading">{title}</h6>
-                  {items.map(({ title, href }) => <>
-                    <Link href={href}>
-                      <a className="nav__item">{title}</a>
-                    </Link>
-                  </>)}
-                </nav>
-              </>
+            {nav.map(({ title, responsive, items }, i) =>
+              <nav key={title + i} className="nav">
+                <h6 className="nav__heading">{title}</h6>
+                {items.map(({ title, href }, i) =>
+                  <Link key={title + i} href={href}>
+                    <a className="nav__item">{title}</a>
+                  </Link>
+                )}
+              </nav>
             )}
           </Grid>
         </Section>
@@ -205,8 +257,31 @@ export const Footer: FC<FooterProps> = ({ partners, children, nav }) => {
                  wrapper
                  id="footer_nav"
                  style={{ color: "var(--color-background-fixed)", overflow: "hidden" }}>
-          <Grid col={[2, 5, 5]}>
-            hello
+          <Grid col={[2, 5, 5]} align="flex-end">
+            <GridItem col="span 2">
+              <div className="contact-nav">
+                {contactNav.map(({ href, nav, title, icon, alt }, i) =>
+                  <a key={href + i} href={href} className={`contact-nav__item`}>
+                    {
+                      createElement(require(icon.substr(0, 2).toLowerCase() === "io"
+                                            ? "react-icons/io"
+                                            : "react-icons/fa")[icon], { alt: title || alt })
+                    }
+                  </a>
+                )}
+              </div>
+            </GridItem>
+            <GridItem col="4">
+              <div className="copyright" dangerouslySetInnerHTML={{ __html: copyright }} />
+            </GridItem>
+            <GridItem col="5">
+              <Link href={logo.href}>
+                <a className="logo">
+                  {logo.src.length ? <img src={logo.src} alt="Logo" /> :
+                   <LogoSvg style={{ maxWidth: "100%", height: `calc(var(--header-height) - var(--space-8x))`, maxHeight: `100%` }}
+                            alt={logo.alt} />}</a>
+              </Link>
+            </GridItem>
           </Grid>
         </Section>
       </footer>

@@ -1,15 +1,18 @@
 import { CSSProperties, FC } from "react";
+import { AlignItemsProperty, JustifyContentProperty } from "csstype";
 
 type GridProps = {
   id?: string
   className?: string
   style?: CSSProperties
+  align?: AlignItemsProperty
+  justify?: JustifyContentProperty
   col?: [number, number, number]
   row?: [number, number, number]
   gap?: [number, number, number]
 }
 
-export const Grid: FC<GridProps> = ({ children, col, row, gap, id = "", className = "", style = {} }) => {
+export const Grid: FC<GridProps> = ({ children, col, row,align, justify, gap, id = "", className = "", style = {} }) => {
   
   if (col?.length === 3) {
     style["--grid-template-col"] = col[2];
@@ -28,6 +31,9 @@ export const Grid: FC<GridProps> = ({ children, col, row, gap, id = "", classNam
     style["--grid-gap-t"] = gap[1];
     style["--grid-gap-m"] = gap[0];
   }
+  
+  align && (style["alignItems"] = align)
+  justify && (style["justifyContent"] = justify)
   
   return (
     <>

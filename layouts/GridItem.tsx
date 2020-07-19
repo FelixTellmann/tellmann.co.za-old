@@ -20,7 +20,7 @@ export const GridItem: FC<GridItemProps> = ({ children, aspect, col, row, style 
         position: relative;
         width: 100%;
         grid-column: var(--grid-col);
-        overflow: hidden;
+        /*overflow: hidden;*/
         
         &:before {
           content: "";
