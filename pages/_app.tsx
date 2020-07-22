@@ -21,9 +21,6 @@ export type Props = AppProps
 export const Root: FC<Props> = ({ pageProps, Component }) => {
   const [showHeader, setShowHeader] = useState(false);
   
-  useGlobalEvent("scroll")((e) => document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`));
-  useGlobalEvent("resize")((e) => document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`));
-  useGlobalEvent("touchmove")((e) => document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`));
   
   return (
     <>

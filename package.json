@@ -22,7 +22,8 @@
         "start": "next start",
         "export": "npm run build && next export",
         "test": "jest --watch",
-        "test-all": "jest --watchAll"
+        "test-all": "jest --watchAll",
+        "mdx": "mdx-deck presentations/ecommerce.mdx"
     },
     "author": "Felix Tellmann",
     "license": "ISC",
@@ -66,5 +67,8 @@
         "typed.js": "^2.0.11",
         "typescript": "^3.9.5",
         "url-loader": "^4.1.0"
+    },
+    "devDependencies": {
+        "mdx-deck": "^4.1.1"
     }
 }

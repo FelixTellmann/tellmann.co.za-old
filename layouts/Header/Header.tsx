@@ -21,6 +21,11 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
                                                                        ? !showMobileHeader
                                                                        : showMobileHeader);
   
+  useGlobalEvent("scroll")((e) => document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`));
+  useGlobalEvent("resize")((e) => document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`));
+  useGlobalEvent("touchmove")((e) => document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`));
+  
+  
   const [isHeaderScrolledDown, setIsheaderScrolledDown] = useState(false);
   
   useGlobalEvent("scroll")((event) => {
