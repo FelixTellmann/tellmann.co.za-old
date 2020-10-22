@@ -600,7 +600,7 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
               <span className="nav-lines" />
             </div>
           </div>
-        
+
         </Container>
       </header>
     </>
