@@ -1,23 +1,21 @@
 import { AppProps } from 'next/app';
 import { createContext, FC } from 'react';
 import GoogleFonts from 'next-google-fonts';
-import { BreakpointProvider, useStyledSystem } from "use-styled-system";
+import { All, BreakpointProvider } from "use-styled-system";
 import { DefaultSeo } from 'next-seo';
 import 'reset-css/sass/_reset.scss';
 import { useRouter } from 'next/router';
 import useColorTheme from 'use-color-theme';
+import { Box } from "../components/Box";
 
 export const ThemeContext = createContext({ theme: '' });
 
-export const Root: FC<AppProps> = ({ pageProps, Component }) => {
-  const colorTheme = useColorTheme('light-theme', { classNames: ['light-theme', 'dark-theme', 'blue-theme'] });
-  const { styleJsx } = useStyledSystem(pageProps, {})
+export const Root: FC<AppProps & All> = ({ pageProps, Component }) => {
+  const colorTheme = useColorTheme('light-theme', { classNames: ['light-theme', 'dark-theme'] });
   const router = useRouter();
   return (
     <>
-      <style jsx>{`
-          ${styleJsx}
-      `}</style>
+     
       <>
         <DefaultSeo
             title="Tellmann - E-commerce Web development Studio"
@@ -48,14 +46,14 @@ export const Root: FC<AppProps> = ({ pageProps, Component }) => {
         <GoogleFonts href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@400;600;700&display=swap" />
       </>
       
-     {/* <BreakpointProvider breakPoints={[0, 600, 900, 1200]}>*/}
+      <BreakpointProvider breakPoints={[0, 600, 900, 1200]}>
         <ThemeContext.Provider value={{ theme: colorTheme.value }}>
           <div className="page">
+            <Box>test</Box>
             <Component {...pageProps} />
           </div>
         </ThemeContext.Provider>
-      {/*</BreakpointProvider>
-      <Component {...pageProps} />*/}
+      </BreakpointProvider>
     </>
   );
 };
