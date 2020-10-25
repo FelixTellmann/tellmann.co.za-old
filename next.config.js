@@ -1,11 +1,18 @@
-const withSass = require('@zeit/next-sass');
-const withCSS = require('@zeit/next-css');
-const path = require('path');
+const withPlugins = require('next-compose-plugins');
+const SCSS = require('@zeit/next-sass');
 const fs = require('fs');
+const path = require('path');
+const optimizedImages = require('next-optimized-images');
 
-module.exports = withSass(withCSS({
-  webpack(config, { defaultLoaders }) {
-    config.module.rules.push({
+module.exports = withPlugins(
+  [
+    [optimizedImages, { optimizeImagesInDev: true }],
+    [SCSS],
+  ],
+  {
+    webpack(config, { isServer }) {
+      config.module.rules.push(
+        {
           test: /\.(png|eot|otf|ttf|woff|woff2)$/,
           use: {
             loader: 'url-loader',
@@ -21,15 +28,31 @@ module.exports = withSass(withCSS({
             },
           },
         },
-        {
+        fs.readdirSync(path.join(process.cwd(), 'styles')).filter((file) => file.match(/^_.*\.scss$/)).length > 0 ? {
           enforce: 'pre',
           test: /.scss$/,
           loader: 'sass-resources-loader',
           options: {
-            resources: fs.readdirSync(path.join(process.cwd(), 'styles')).filter(file => file.match(/^_.*\.scss$/)).map(file => './styles/' + file),
+            resources:
+              fs
+                .readdirSync(path.join(process.cwd(), 'styles'))
+                .filter((file) => file.match(/^_.*\.scss$/))
+                .map((file) => `./styles/${file}`),
+
           },
-        });
-    config.resolve.extensions = [".ts", ".js", ".jsx", ".tsx", ".svg"];
-    return config;
+        } : {},
+      );
+
+      if (isServer) {
+        require('./lib/createSitemap');
+      }
+
+      config.resolve.extensions = ['.ts', '.js', '.jsx', '.tsx', '.svg', '.scss'];
+      return config;
+    },
   },
-}));
+);
+
+module.exports.env = {
+  BUTTONDOWN_API_KEY: process.env.BUTTONDOWN_API_KEY,
+};
