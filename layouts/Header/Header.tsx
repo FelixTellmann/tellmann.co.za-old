@@ -1,34 +1,37 @@
-import React, { createElement, CSSProperties, FC, MouseEventHandler, useEffect, useState } from "react";
-import Fade from "react-reveal/Fade";
-import { Container } from "layouts/Container";
-import LogoSvg from "public/logo3-28.svg";
-import Link from "next/link";
-import { Text } from "components";
 import { useGlobalEvent } from "beautiful-react-hooks";
+import { Text } from "components";
+import { Container } from "layouts/Container";
+import Link from "next/link";
+import LogoSvg from "public/logo3-28.svg";
+import React, { CSSProperties, FC, MouseEventHandler, useContext, useState } from "react";
+import Fade from "react-reveal/Fade";
+import { NavIcon } from "components/NavIcon";
+import {ModalContext} from 'components/ModalBackground';
 
 type HeaderProps = {
   logo: { href: string, src: string, alt?: string }
   nav: { href: string, title: string, alt?: string, style?: "button" | "hideOnDesktop" }[]
   address: { city: string, street: string, location: string, tel: string }
-  contactNav: { href: string, title?: string, icon?: string, alt: string, style?: "iconOnMobile", nav?: boolean }[]
+  contactNav: { href: string, title?: string, icon?: JSX.Element, alt: string, style?: "iconOnMobile", nav?: boolean }[]
   style?: CSSProperties
 }
 
 export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style = {} }) => {
   
   const [showMobileHeader, setShowMobileHeader] = useState(false);
-  const toggleMobileNav: MouseEventHandler = () => setShowMobileHeader(window.innerWidth <= 600
-                                                                       ? !showMobileHeader
-                                                                       : showMobileHeader);
-  
-  useGlobalEvent("scroll")((e) => document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`));
-  useGlobalEvent("resize")((e) => document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`));
-  useGlobalEvent("touchmove")((e) => document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`));
-  
-  
+  const [modalBackgroundActive, setModalBackgroundActive] = useContext(ModalContext)
   const [isHeaderScrolledDown, setIsheaderScrolledDown] = useState(false);
   
-  useGlobalEvent("scroll")((event) => {
+  const toggleMobileNav: MouseEventHandler = () => {
+    if (window.innerWidth <= 600) {
+      setShowMobileHeader(!showMobileHeader)
+      console.log(modalBackgroundActive)
+      setModalBackgroundActive(!modalBackgroundActive)
+    }
+  };
+  
+  // @ts-ignore
+  useGlobalEvent("scroll")((): void => {
     setIsheaderScrolledDown(window.scrollY > 0);
   });
   
@@ -36,7 +39,7 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
     <>
       <style jsx>{`
         @import 'styles/mixins';
-        
+
         .header {
           position: fixed;
           z-index: 1000;
@@ -47,48 +50,23 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
           background: transparent;
           color: inherit;
           transition-delay: 0.2s;
-          
+
           &.scrolled-down {
             @include responsive('small') {
               background-color: rgba(var(--color-background-rgb), 0.7);
               transition: 0.1s ease-in;
-              backdrop-filter: saturate(180%) blur(5px);
+              backdrop-filter: saturate(180%) blur(2rem);
               box-shadow: 0px -1px 0px 0px inset rgba(0, 0, 0, 0.15);
             }
           }
-          
+
           a {
             text-decoration: none;
           }
+
           
-          &:before {
-            position: fixed;
-            content: '';
-            z-index: -1;
-            top: -100vh;
-            left: 0;
-            width: 50vw;
-            height: 0;
-            border-right: solid 1px rgba(var(--color-border-rgb), 0.1);
-            background-color: var(--color-text);
-            transition: height var(--transition-8);
-            transition-delay: 0.35s;
-          }
-          
-          &:after {
-            position: fixed;
-            content: '';
-            z-index: -2;
-            right: 0;
-            bottom: -100vh;
-            width: 50vw;
-            height: 0;
-            background-color: var(--color-text);
-            transition: height var(--transition-8);
-            transition-delay: 0.35s;
-          }
         }
-        
+
         .logo {
           min-width: 1px;
           height: 100%;
@@ -97,14 +75,14 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
           display: block;
           padding: var(--space-2x) 0;
           color: inherit;
-          
+
           img, svg {
             max-width: 100%;
             height: calc(var(--header-height) - var(--space-4x));
             max-height: 100%;
           }
         }
-        
+
         @include responsive('mobile') {
           .nav__tagline {
             display: none;
@@ -120,17 +98,17 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
             justify-content: space-between;
             padding: 0;
             transition-delay: 0.4s;
-            
+
             .nav__item {
               display: flex;
               align-items: flex-end;
               justify-content: space-between;
               font-size: 2rem;
               font-weight: 500;
-              
+
               .nav__item__title {
                 position: relative;
-                
+
                 &:before {
                   position: absolute;
                   content: '';
@@ -146,15 +124,15 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
                   transition: var(--transition-2);
                 }
               }
-              
+
               &:hover, &:focus, &:active, &.active {
                 outline: none;
-                
+
                 & .nav__item__title:before {
                   width: 110%;
                 }
               }
-              
+
               .nav__item__line {
                 height: 100%;
                 min-height: 0.2rem;
@@ -165,7 +143,7 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
                 background-position: bottom;
                 background-size: 1rem 0.1rem;
               }
-              
+
               .nav__item__alt {
                 font-size: 1.5rem;
                 font-weight: 400;
@@ -173,38 +151,38 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
                 letter-spacing: 0.05rem;
               }
             }
-            
+
             .nav__address {
               margin-top: var(--space-8x);
               margin-bottom: var(--space-8x);
               font-size: 1.2rem;
-              
+
               a {
                 &:hover, &:focus, &:active {
                   color: var(--color-accent)
                 }
               }
             }
-            
+
             .nav__contact {
               display: flex;
               flex-direction: row-reverse;
               align-items: center;
               justify-content: space-between;
-              
+
               a {
                 transition: var(--transition);
-                
+
                 &:hover, &:focus, &:active {
                   color: var(--color-accent)
                 }
               }
-              
+
               .nav__contact__item--icon {
                 padding: var(--space-2x);
                 font-size: 2.6rem;
               }
-              
+
               .nav__contact__item--text {
                 margin-left: auto;
                 font-size: 1.4rem;
@@ -212,7 +190,7 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
                 letter-spacing: 0.1rem;
               }
             }
-            
+
             .nav__break {
               width: 40%;
               height: 0.2rem;
@@ -225,7 +203,7 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
             display: flex;
             align-items: center;
             justify-items: flex-end;
-            
+
             .mobile-nav__item {
               opacity: 1;
               display: flex;
@@ -234,66 +212,26 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
               padding-left: var(--space-2x);
               font-size: 3.0rem;
               transition: var(--transition);
-              
+
               &:last-of-type {
                 margin-right: var(--space-4x);
               }
-              
+
               &:hover, &:focus, &:active {
                 color: var(--color-accent)
               }
             }
-            
-            .nav-menu {
-              position: relative;
-              width: 3rem;
-              height: 3rem;
-              display: block;
-              cursor: pointer;
-              
-              .nav-lines {
-                &, &:before, &:after {
-                  position: absolute;
-                  content: '';
-                  width: 100%;
-                  height: 0.3rem;
-                  display: block;
-                  border-radius: 0.3rem;
-                  background-color: var(--color-text);
-                  pointer-events: none;
-                  transform: rotate(0);
-                }
-                
-                & {
-                  top: calc(50% - 0.3rem / 2);
-                  transition: background-color .2s, top .2s, left .2s, transform .2s .15s;
-                }
-                
-                &:before {
-                  bottom: 1rem;
-                  left: 0;
-                  width: 2rem;
-                  transition: bottom .2s .2s, left .1s, transform .2s, background-color .4s .2s;
-                }
-                
-                &:after {
-                  top: 1rem;
-                  right: 0;
-                  width: 2rem;
-                  transition: top .2s .2s, right .1s, transform .2s, background-color .4s .2s;
-                }
-              }
-            }
+
           }
           .header.active {
             color: var(--color-background);
-            
+
             &:before, &:after {
               bottom: -20vh;
               height: 250vh;
               transition-delay: 0s;
             }
-            
+
             .nav {
               height: calc((var(--vh, 1vh) * 100) - var(--header-height));
               //noinspection CssInvalidPropertyValue
@@ -302,39 +240,18 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
               padding-bottom: var(--wrapper-padding);
               transition-delay: 0s;
             }
-            
+
             .mobile-nav {
               .mobile-nav__item {
                 opacity: 0;
                 visibility: hidden;
                 pointer-events: none;
               }
-              
-              .nav-lines {
-                & {
-                  background-color: transparent;
-                }
-                
-                &:before {
-                  bottom: 0;
-                  left: .5rem;
-                  background-color: var(--color-accent);
-                  transition: background-color .2s, bottom .2s, left .2s, transform .2s .15s;
-                  transform: rotate(-45deg);
-                }
-                
-                &:after {
-                  top: 0;
-                  right: .5rem;
-                  background-color: var(--color-accent);
-                  transition: background-color .2s, top .2s, right .2s, transform .2s .15s;
-                  transform: rotate(45deg);
-                }
-              }
+
             }
           }
         }
-        
+
         @include responsive('tablet-and-up') {
           .address, .nav__item--hidden, .mobile-nav, .nav__item__line, .nav__item__alt {
             display: none !important;
@@ -349,7 +266,7 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
             align-items: center;
             justify-content: flex-end;
             transition: var(--transition);
-            
+
             .nav__item:not(.button) {
               position: relative;
               display: flex;
@@ -360,11 +277,11 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
               font-weight: var(--font-weight-nav);
               text-decoration: none;
               transition: var(--transition-2);
-              
+
               &:last-of-type {
                 margin: 0 0 0 var(--gap);
               }
-              
+
               &:before {
                 position: absolute;
                 content: '';
@@ -379,16 +296,16 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
                 color: transparent;
                 transition: var(--transition-2);
               }
-              
+
               &:hover, &:focus, &:active, &.active {
                 outline: none;
-                
+
                 &:before {
                   width: 100%;
                 }
               }
             }
-            
+
             .button {
               position: relative;
               content: '';
@@ -410,7 +327,7 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
               text-decoration: none;
               text-transform: uppercase;
               transition: ease-in-out 0.2s;
-              
+
               &:before, &:after {
                 position: absolute;
                 content: '';
@@ -422,52 +339,52 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
                 background: var(--color-text);
                 transition: ease-in-out 0.2s;
               }
-              
+
               &:before {
                 top: -80px;
                 left: calc(50% + 4.5px);
               }
-              
+
               &:after {
                 bottom: -80px;
                 left: calc(50% - 4.5px);
                 background: var(--color-accent);
               }
-              
+
               &:hover, &:focus, &:active {
                 background-color: var(--color-text);
                 color: var(--color-background);
-                
+
                 &:before {
                   top: -7px;
                   opacity: 1;
                 }
-                
+
                 &:after {
                   bottom: -7px;
                   opacity: 1;
                 }
               }
             }
-            
+
             .nav__item__title {
               opacity: 1 !important;
             }
           }
         }
-        
+
         @include responsive('tablet') {
           .nav {
             .nav__item:not(.button) {
               margin: 0 var(--space-4x);
-              
+
               &:last-of-type {
                 margin: 0 0 0 var(--gap);
               }
             }
           }
         }
-        
+
         @include responsive('desktop') {
           .header {
             padding-right: 6rem;
@@ -484,7 +401,7 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
             align-items: center;
             justify-content: center;
             writing-mode: vertical-rl;
-            
+
             a {
               margin: var(--space-1x);
               color: rgba(var(--color-text-rgb), 0.75);
@@ -493,11 +410,11 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
               letter-spacing: 0.175rem;
               text-decoration: none;
               text-transform: uppercase;
-              
+
               &.nav__contact__item--icon {
                 font-size: 2.4rem;
               }
-              
+
               &:hover, &:focus, &:active {
                 color: var(--color-accent);
               }
@@ -505,7 +422,7 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
           }
           .nav__contact {
             left: 0;
-            
+
             .nav__contact__item--text {
               margin: var(--space-2x);
               transform: rotate(180deg);
@@ -516,8 +433,7 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
           }
         }
       `}</style>
-      <header className={`header ${showMobileHeader ? "active" : ""} ${isHeaderScrolledDown ? "scrolled-down" : ""}`}
-              style={style}>
+      <header className={`header ${showMobileHeader ? "active" : ""} ${!modalBackgroundActive && isHeaderScrolledDown ? "scrolled-down" : ""}`} style={style}>
         <Container wrapper align="center" justify="space-between" row>
           {/*================ LOGO ================*/}
           <Link href={logo.href}>
@@ -551,8 +467,9 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
                   <Text h6 noMargin weight={"normal"}>{address.city}</Text>
                   <Text h6 noMargin weight={"normal"}>{address.street}</Text>
                   <Text h6 noMargin weight={"normal"}>{address.location}</Text>
-                  <Text h6 noMargin weight={"normal"}><a href={`tel:${address.tel}`}>{address.tel.replace("+27", "0")
-                    .replace(/^(\d\d\d)(\d\d\d)(\d\d\d\d)$/, "$1 $2 $3")}</a></Text>
+                  <Text h6
+                        noMargin
+                        weight={"normal"}><a href={`tel:${address.tel}`}>{address.tel.replace("+27", "0").replace(/^(\d\d\d)(\d\d\d)(\d\d\d\d)$/, "$1 $2 $3")}</a></Text>
                 </div>
                 {/*================ CONTACT ================*/}
                 <div className="nav__break" />
@@ -567,13 +484,10 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
                   <a key={href}
                      href={href}
                      className={`nav__contact__item${icon && (style === "iconOnMobile" || title === "")
-                                                     ? " nav__contact__item--icon" : " nav__contact__item--text"}`}>
+                                                     ? " nav__contact__item--icon"
+                                                     : " nav__contact__item--text"}`}>
                     {
-                      icon && (style === "iconOnMobile" || title === "")
-                      ? createElement(require(icon.substr(0, 2).toLowerCase() === "io"
-                                              ? "react-icons/io"
-                                              : "react-icons/fa")[icon], { alt: title || alt })
-                      : title
+                      icon && (style === "iconOnMobile" || title === "") ? icon : title
                     }
                   </a>
                 )}
@@ -584,23 +498,13 @@ export const Header: FC<HeaderProps> = ({ logo, nav, contactNav, address, style 
             </aside>
           </nav>
           <div className="mobile-nav">
-            {contactNav.map(({ href, nav, title, icon, alt }) =>
-              
+            {contactNav.map(({ href, nav, title, icon }) =>
               icon && nav
-              ? <a key={href} href={href} className={`mobile-nav__item`}>
-                {
-                  createElement(require(icon.substr(0, 2).toLowerCase() === "io"
-                                        ? "react-icons/io"
-                                        : "react-icons/fa")[icon], { alt: title || alt })
-                }
-              </a>
+              ? <a key={href} href={href} className={`mobile-nav__item`}>{icon}</a>
               : title
             )}
-            <div className="nav-menu" onClick={toggleMobileNav}>
-              <span className="nav-lines" />
-            </div>
+            <NavIcon isOpen={showMobileHeader} toggleMobileNav={toggleMobileNav} />
           </div>
-
         </Container>
       </header>
     </>
