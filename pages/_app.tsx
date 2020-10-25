@@ -1,7 +1,7 @@
 import { AppProps } from 'next/app';
 import { createContext, FC } from 'react';
 import GoogleFonts from 'next-google-fonts';
-import { BreakpointProvider } from 'use-styled-system';
+import { BreakpointProvider, useStyledSystem } from "use-styled-system";
 import { DefaultSeo } from 'next-seo';
 import 'reset-css/sass/_reset.scss';
 import { useRouter } from 'next/router';
@@ -11,12 +11,16 @@ export const ThemeContext = createContext({ theme: '' });
 
 export const Root: FC<AppProps> = ({ pageProps, Component }) => {
   const colorTheme = useColorTheme('light-theme', { classNames: ['light-theme', 'dark-theme', 'blue-theme'] });
+  const { styleJsx } = useStyledSystem(pageProps, {})
   const router = useRouter();
   return (
     <>
+      <style jsx>{`
+          ${styleJsx}
+      `}</style>
       <>
         <DefaultSeo
-            title="Tellmann - Front-end Engineer"
+            title="Tellmann - E-commerce Web development Studio"
             description="Creator of things that live on the internet - Web developer, writer and entrepreneur."
             openGraph={{
               type: 'website',
@@ -43,11 +47,15 @@ export const Root: FC<AppProps> = ({ pageProps, Component }) => {
         />
         <GoogleFonts href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@400;600;700&display=swap" />
       </>
-
-      <BreakpointProvider breakPoints={[0, 600, 900, 1200]}>
+      
+     {/* <BreakpointProvider breakPoints={[0, 600, 900, 1200]}>*/}
         <ThemeContext.Provider value={{ theme: colorTheme.value }}>
+          <div className="page">
+            <Component {...pageProps} />
+          </div>
         </ThemeContext.Provider>
-      </BreakpointProvider>
+      {/*</BreakpointProvider>
+      <Component {...pageProps} />*/}
     </>
   );
 };

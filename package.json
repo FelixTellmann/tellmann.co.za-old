@@ -28,7 +28,8 @@
     "styled-jsx-plugin-sass": "^1.0.0",
     "typed.js": "^2.0.11",
     "typescript": "^4.0.3",
-    "url-loader": "^4.1.1"
+    "url-loader": "^4.1.1",
+    "use-styled-system": "^2.3.0"
   },
   "devDependencies": {
     "babel-plugin-inline-react-svg": "^1.1.1",
@@ -48,9 +49,9 @@
     "next-optimized-images": "^2.6.2",
     "next-seo": "^4.14.0",
     "node-sass": "^4.14.1",
+    "react-optimized-image": "^0.4.1",
     "reset-css": "^5.0.1",
     "sass-loader": "^10.0.4",
-    "use-color-theme": "^1.1.2",
-    "use-styled-system": "^2.2.32"
+    "use-color-theme": "^1.1.2"
   }
 }
