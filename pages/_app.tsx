@@ -4,7 +4,6 @@ import { AppProps } from "next/app";
 import React, { FC, useState } from "react";
 import "styles/animations.scss";
 import "styles/button.scss";
-
 import "styles/reset.scss";
 import "styles/responsive.scss";
 import "styles/theme.scss";
