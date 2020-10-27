@@ -78,7 +78,7 @@ export const Root: FC<AppProps> = ({ pageProps, Component }) => {
       
       <BreakpointProvider breakPoints={[0, 600, 900, 1200]}>
         <ThemeContext.Provider value={{ theme: colorTheme.value }}>
-          <ModalBackground active={false}>
+         
             <Header
               logo={{ href: "#home", src: "", alt: "Tellmann Logo" }}
               nav={[
@@ -177,9 +177,6 @@ export const Root: FC<AppProps> = ({ pageProps, Component }) => {
                 copyright={`Copyright © 2017 - ${new Date(Date.now()).getFullYear()}.<br>All rights reserved. Tellmann.`}
               />
             </main>
-          
-          
-          </ModalBackground>
         </ThemeContext.Provider>
       </BreakpointProvider>
     </>

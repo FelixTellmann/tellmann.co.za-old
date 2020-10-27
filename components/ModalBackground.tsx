@@ -1,18 +1,18 @@
 import React, { createContext, FC, useState } from "react";
 
 type ModalBackgroundProps = {
-  active
+  isActive: boolean
 };
 export const ModalContext = createContext([]);
 
-export const ModalBackground: FC<ModalBackgroundProps> = ({children}) => {
+export const ModalBackground: FC<ModalBackgroundProps> = ({isActive,children}) => {
   const [active, setActive] = useState([false, (input)=> {setActive([input, active[1]])}]);
  
-  
+
   return <>
     <ModalContext.Provider value={active}>
       {children}
-      <div className={active[0] ? "active" : ""}>
+      <div className={(isActive || active[0]) ? "active" : ""}>
         <aside className="left" />
         <aside className="right" />
         <span className="closeModal" />
@@ -24,8 +24,9 @@ export const ModalBackground: FC<ModalBackgroundProps> = ({children}) => {
           bottom: 0;
           left: 0;
           right: 0;
-          width: 100%;
-          height: 100%;
+          width: 100vw;
+          height: 100vh;
+          
 
           .left {
             position: absolute;
@@ -44,12 +45,12 @@ export const ModalBackground: FC<ModalBackgroundProps> = ({children}) => {
             position: absolute;
             right: 0;
             bottom: 0;
-            width: 50%;
+            width: calc(50% + 1px);
             height: 0;
             background-color: var(--color-text);
             transition: height var(--transition-8);
             transition-delay: 0.35s;
-            z-index: 10;
+            z-index: 9;
           }
 
           &.active {
