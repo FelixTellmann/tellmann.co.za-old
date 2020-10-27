@@ -14,7 +14,6 @@ import "styles/theme.scss";
 import "styles/typography.scss";
 import useColorTheme from "use-color-theme";
 import { BreakpointProvider } from "use-styled-system";
-import { ModalBackground } from "../components/ModalBackground";
 
 export const ThemeContext = createContext({ theme: "" });
 const title = "Tellmann - E-commerce Web development Studio";
@@ -78,7 +77,6 @@ export const Root: FC<AppProps> = ({ pageProps, Component }) => {
       
       <BreakpointProvider breakPoints={[0, 600, 900, 1200]}>
         <ThemeContext.Provider value={{ theme: colorTheme.value }}>
-         
             <Header
               logo={{ href: "#home", src: "", alt: "Tellmann Logo" }}
               nav={[
@@ -182,11 +180,6 @@ export const Root: FC<AppProps> = ({ pageProps, Component }) => {
     </>
   );
 };
-/*
-Root.getInitialProps = async (appContext) => {
-    // calls page's `getInitialProps` and fills `appProps.pageProps`
-    const appProps = await App.getInitialProps(appContext);
-    return { ...appProps };
-};*/
+
 
 export default Root;
