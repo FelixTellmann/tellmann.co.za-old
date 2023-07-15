@@ -37,7 +37,7 @@
     "next-google-fonts": "^1.2.1",
     "next-optimized-images": "^3.0.0-canary.10",
     "next-seo": "^4.14.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^9.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^3.11.0",
